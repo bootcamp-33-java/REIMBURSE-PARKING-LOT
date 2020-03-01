@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.example_33_ConsumeAPI_jar_0.0.1-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.bootcamp.ConsumeAPI.entities.Department</class>
+    <class>com.bootcamp.ConsumeAPI.entities.Employee</class>
+    <class>com.bootcamp.ConsumeAPI.entities.TbTrTicket</class>
+    <class>com.bootcamp.ConsumeAPI.entities.TbMVehicle</class>
+    <class>com.bootcamp.ConsumeAPI.entities.TbTrReimburse</class>
+    <class>com.bootcamp.ConsumeAPI.entities.TbMParkingLot</class>
+    <class>com.bootcamp.ConsumeAPI.entities.TbTrSite</class>
+    <class>com.bootcamp.ConsumeAPI.entities.TbMEmployee</class>
+    <class>com.bootcamp.ConsumeAPI.entities.TbTrHistory</class>
+    <class>com.bootcamp.ConsumeAPI.entities.TbMStatus</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_dummy?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+    </properties>
+  </persistence-unit>
+</persistence>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Department</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <!-- Our Custom CSS -->
+        <!-- Scrollbar Custom CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+        <!-- Font Awesome JS -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+        <!--SweetAlert-->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <!--        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>-->
+
+        <!--bootstrap-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <!--DataTables-->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#d_table').DataTable();
+            });
+        </script>
+    </head>
+    <body><!--
+        <div class="container text-center" style="font-size: 25px; font-style: normal;padding-top: 1%"><p>Department Data</p></div>
+        <div class="container col-sm-10" style="padding-top: 2%">
+
+            Trigger/tombol modal insert
+-->            <button type="button" class="btn btn-info"  data-toggle="modal" data-target="#insertModal" >
+                Insert Data
+            </button>
+        </div>
+
+<!--        Modal Insert Department data-->
+<!--        <form th:action="@{save}" th:object="${department}" method="POST">
+
+            Membuat class MODAL INSERT
+            <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Insert Department</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            Isi method Insert Modal
+
+                            <div class="form-group">
+                                <label for="id" class=" label">Department ID</label>
+                                <input type="text" class="form-control" id="id" name="id" th:value="${as.id}">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class=" label">Department Name</label>
+                                <input type="text" class="form-control" id="name" name="name" th:value="${as.name}">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            Button pada modal Insert
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" onclick="insertBtn()">Save </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        end modal
+        <br>
+        
+-->        <div  class="container col-sm-10">
+
+            <table id="d_table" class="table table-strip table-hover table-bordered">
+                <thead style="background-color: #94cc41" >
+                    <tr>
+                        <th style="text-align: center">ID</th>
+                        <th style="text-align: center">NAME</th>
+                        <th style="text-align: center">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="as : ${departments}">
+                        <td style="text-align: center" th:text="${as.id}"></td>
+                        <td style="text-align: center" th:text="${as.name}"></td>
+                        <td style="text-align: center">
+                            Button Update Modal
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#updatedModal" th:attr="data-target='#updatedModal'+${as.id }"><i class="fa fa-edit"></i></button>  
+                            Button Delete
+                            <button class="btn btn-danger btn-sm" th:id="@{/delete/{id}(id=${as.id})}" onclick="removeBtn(this.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
+                            <form th:action="@{save}" th:object="${department}" method="POST">
+                                <div align="center" class="form-group">
+                                    <div class="modal fade" th:id="updatedModal+${as.id }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Update Department</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <table class="container" style="border-collapse: separate" >
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Department ID</th>
+                                                                <th><input class="form-control" type="text" readonly="" name="id" th:value="${as.id}"  /></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <br>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Department Name</td>
+                                                                <td><input class="form-control" type="text" name="name" th:value="${as.name}"  /></td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    Button Update pada modal Update
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary" onclick="insertBtn()">Update </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script>
+            function removeBtn(click_id) {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes,delete it'
+                }).then((result) => {
+                    if (result.value) {
+                        document.location.href = click_id;
+                    }
+                })
+            }
+        </script>
+        <script>
+            function insertBtn(click_id) {
+                Swal.fire({
+
+                    icon: 'success',
+                    title: 'Your data has been saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        </script>
+    </body>
+</html>
