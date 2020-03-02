@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
-@RequestMapping(value = "reimburse")
+@RequestMapping(value = "approval")
 @Controller
 public class ReimburseController {
     @Autowired
@@ -17,8 +17,8 @@ public class ReimburseController {
 
     @GetMapping("")
     public String getAll(Model model, HttpServletRequest request) {
-        model.addAttribute("nama", "Hi.. " + request.getSession().getAttribute("employee"));
+        model.addAttribute("nama",  request.getSession().getAttribute("employee"));
         model.addAttribute("approvals", reimburseService.getByStatus(request.getSession().getAttribute("id").toString() ));
-        return "reimburse";
+        return "approval";
     }
 }
