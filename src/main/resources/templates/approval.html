@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
     <div th:replace="fragments/header::head"></div>
 </head>
 <body class="app sidebar-mini">
@@ -34,7 +34,7 @@
                 <div class="tile">
                     <div class="tile-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-bordered" id="d_table">
+                            <table class="table table-hover table-bordered" id="sampleTable">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -53,63 +53,79 @@
                                         <td th:text="${as.total}"></td>
                                         <td th:text="${as.notes}"></td>
                                         <td>
-
-                                            <button type="button" class="btn  btn-primary btn-sm"  data-toggle="modal" data-target="#updateModal" th:attr="data-target='#updateModal'+${as.id}">
-                                                <i class="far fa fa-edit"></i>
-                                            </button>
-                                            <a th:id="@{vehicle/delete/}+${as.id}"
-                                               <button onclick="removeBtn(this.id)" type="button" class="btn  btn-danger btn-sm">
-                                                    <i class="far fa fa-trash"></i>
-                                                </button></a>
-                                            <!--====================================MODAL Approve==================================-->
-                                            <form th:action="@{save}" th:object="${vehicle}" method="post">
-                                                <div class="modal fade" th:id="updateModal+${as.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <button data-toggle="modal" data-target="#updateModalapproved" type="button" class="btn btn-success btn-sm">Approved</button></a>
+                                            <button data-toggle="modal" data-target="#updateModalreject"type="button" class="btn btn-danger btn-sm">Rejected</button></a>
+                                            
+                                            <form action="@{}" method="POST">
+                                                <div class="modal fade" id="updateModalapproved" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Give a Notes</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
 
-                                                            <!--==================================Isi method UPDATE Modal====================================================================-->
                                                             <div class="modal-body">
-
                                                                 <table border="0" >
+
                                                                     <tbody>
                                                                         <tr>
-                                                                            <th>Number Plate</th>
-                                                                            <th><input type="text" id="id" name="id" th:value="${as.id}" /></th>
+                                                                            <td>Notes</td>
+                                                                            <td><textarea rows="4" cols="40" name="note" value="<% out.print(r.getNotes() == null ? "" : r.getNotes()); %>" ></textarea></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>Vehicle Type</td>
-                                                                            <td><input type="text" id="vehicleType" name="vehicleType" th:value="${as.vehicleType}" /></td>
+                                                                            <td colspan="2"><input type="hidden" readonly=""  name="id" value="<% out.print(r.getId()); %>"  /></td>
                                                                         </tr>
-                                                                        <tr>
-                                                                            <td>STNK Owner</td>
-                                                                            <td><input type="text" id="stnkOwner" name="stnkOwner" th:value="${as.stnkOwner}" /></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Photo STNK</td>
-                                                                            <td><input type="text" id="photoStnk" name="photoStnk" th:value="${as.photoStnk}" /></td>
-                                                                        </tr>
-
-
                                                                     </tbody>
                                                                 </table>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <!--==================================Button pada modal UPDATE====================================================================-->
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                                <button onclick="okeBtn()" type="submit" class="btn btn-primary">Update </button>
-
+                                                                <!--Button Update pada modal Update-->
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Add </button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </form>
-                                            <!--====================================END MODAL UPATE==================================-->
+
+                                            <!--modal reject-->
+                                            <form action="pic?action=reject" method="POST">
+                                                <div class="modal fade" id="updateModalreject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Give a Notes</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+
+                                                            <div class="modal-body">
+                                                                <table border="0" >
+
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Notes</td>
+                                                                            <td><textarea rows="4" cols="40" name="note" value="<% out.print(r.getNotes() == null ? "" : r.getNotes()); %>" ></textarea></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="2"><input type="hidden" readonly=""  name="id" value="<% out.print(r.getId()); %>"  /></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <!--Button Update pada modal Update-->
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Add </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -122,7 +138,7 @@
     </main>
 
 
-  <div th:replace="fragments/header::script"></div>
+    <div th:replace="fragments/header::script"></div>
 </body>
 
 
