@@ -46,7 +46,7 @@ public class LoginController {
 
     @GetMapping("login")
     public String handlingLog() {
-        String result = "";
+        String result;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             result = "redirect:/";
