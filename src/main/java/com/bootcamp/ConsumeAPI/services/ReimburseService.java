@@ -3,6 +3,8 @@ package com.bootcamp.ConsumeAPI.services;
 
 import com.bootcamp.ConsumeAPI.entities.Employee;
 import com.bootcamp.ConsumeAPI.entities.Reimburse;
+import com.bootcamp.ConsumeAPI.entities.Status;
+import com.bootcamp.ConsumeAPI.entities.UpdateStatusDto;
 import com.bootcamp.ConsumeAPI.repositories.ReimburseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,8 +58,50 @@ public class ReimburseService {
         return reimburseList;
     }
 
-    public Optional<Reimburse> getEmployeeId(String employeeId){
+    public Optional<Reimburse> getEmployeeId(String employeeId) {
         return reimburseRepository.findByEmployee_Id(employeeId);
+    }
+
+    public Reimburse updateStatus(UpdateStatusDto updateStatusDto) {
+        Reimburse reimburse=new Reimburse();
+        Optional<Reimburse> optionalReimburse = reimburseRepository.findById(updateStatusDto.getId());
+
+        Optional<Employee> optionalEmployee = employeeService.getRole(updateStatusDto.getRole());
+
+        if (optionalReimburse.isPresent()) {
+            reimburse=optionalReimburse.get();
+            Status status=new Status();
+
+            if (optionalEmployee.isPresent()){
+                if (updateStatusDto.getStatus().equalsIgnoreCase("approved")){
+                    if (optionalEmployee.get().getRole().equalsIgnoreCase("manager")){
+                        status.setId(5);
+                        reimburse.setCurrentStatus(status);
+                        reimburseRepository.save(reimburse);
+
+                        status.setId(2);
+                        reimburse.setCurrentStatus(status);
+                        reimburseRepository.save(reimburse);
+
+                    }else if (optionalEmployee.get().getRole().equalsIgnoreCase("admin")){
+                        status.setId(6);
+                        reimburse.setCurrentStatus(status);
+                        reimburseRepository.save(reimburse);
+                    }
+                }else if (updateStatusDto.getStatus().equalsIgnoreCase("reject")){
+                    if (optionalEmployee.get().getRole().equalsIgnoreCase("manager")){
+                        status.setId(3);
+                        reimburse.setCurrentStatus(status);
+                        reimburseRepository.save(reimburse);
+                    }else if (optionalEmployee.get().getRole().equalsIgnoreCase("admin")){
+                        status.setId(4);
+                        reimburse.setCurrentStatus(status);
+                        reimburseRepository.save(reimburse);
+                    }
+                }
+            }
+        }
+        return reimburse;
     }
 
 }
