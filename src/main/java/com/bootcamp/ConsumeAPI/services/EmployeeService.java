@@ -34,6 +34,8 @@ public class EmployeeService {
             employeeRepository.save(employee);
         } else {
             Employee employee1 = optionalEmployee.get();
+            employee1.setRole(employee.getRole());
+
             employeeRepository.save(employee1);
         }
 

@@ -45,7 +45,7 @@ public class VehicleController {
         employee.setId(request.getSession().getAttribute("id").toString());
         vehicle.setEmployee(employee);
         service.save(vehicle);
-        return ("vehicle");
+        return ("redirect:/vehicle");
     }
 
     @GetMapping("/{id}")
@@ -60,7 +60,7 @@ public class VehicleController {
     public String delete(@PathVariable("id") String id) {
 
         service.delete(id);
-        return ("redirect:/");
+        return ("redirect:/vehicle");
     }
 
 }
