@@ -1,6 +1,8 @@
 package com.bootcamp.ConsumeAPI.services;
 
 
+import com.bootcamp.ConsumeAPI.entities.Employee;
+import com.bootcamp.ConsumeAPI.entities.EmployeeAPI;
 import com.bootcamp.ConsumeAPI.entities.Reimburse;
 import com.bootcamp.ConsumeAPI.repositories.ReimburseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,9 @@ public class ReimburseService {
         } else {
             Reimburse reimburse1 = optionalReimburse.get();
             reimburse1.setCurrentStatus(reimburse.getCurrentStatus());
-//            Employee employee=reimburse.getEmployee();
-            reimburse1.setEmployee(reimburse.getEmployee());
+            Employee employee=new Employee();
+            employee.setId(reimburse.getEmployee().getId());
+            reimburse1.setEmployee(employee);
             reimburse1.setEndDate(reimburse.getEndDate());
             reimburse1.setNotes(reimburse.getNotes());
             reimburse1.setTotal(reimburse.getTotal());

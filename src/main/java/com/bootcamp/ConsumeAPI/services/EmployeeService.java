@@ -12,23 +12,24 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author FIKRI-PC
+ * @author Insane
  */
+
 @Service
 public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
-
+    
     public Employee getById(String id){
         Employee employee=employeeRepository.findById(id).get();
-
+        
         return employee;
-
+        
     }
-
+    
     public Employee save(Employee employee){
         employeeRepository.save(employee);
-
+        
         return employee;
     }
     
