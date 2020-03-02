@@ -33,7 +33,7 @@ public class VehicleController {
 
     @GetMapping("")
     public String getAll(Model model, HttpServletRequest request){
-        model.addAttribute("nama","Hi.. "+ request.getSession().getAttribute("employee"));
+        model.addAttribute("nama", request.getSession().getAttribute("employee"));
         model.addAttribute("vehicles",service.getAll(request.getSession().getAttribute("id").toString())) ;
           return "vehicle";
     }
