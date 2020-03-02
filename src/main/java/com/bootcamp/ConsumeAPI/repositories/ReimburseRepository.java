@@ -12,4 +12,9 @@ public interface ReimburseRepository extends PagingAndSortingRepository<Reimburs
     List<Reimburse> findAll();
 
     Optional<Reimburse> findById(String id);
+
+    List<Reimburse> findByCurrentStatus_Id(Integer statusId);
+
+    Optional<Reimburse> findByEmployee_Id(String employeeId);
+
 }

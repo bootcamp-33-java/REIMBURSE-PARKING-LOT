@@ -44,6 +44,9 @@ public class Employee implements Serializable {
     @Column(name = "is_active")
     private boolean isActive;
 
+    @Column(name = "role")
+    private String role;
+
     @JoinColumn(name = "site", referencedColumnName = "id", nullable = true)
     @ManyToOne(fetch = FetchType.LAZY)
     private Site site;

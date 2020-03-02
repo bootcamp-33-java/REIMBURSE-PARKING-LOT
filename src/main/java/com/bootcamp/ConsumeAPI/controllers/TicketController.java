@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("ticket")
+import javax.servlet.http.HttpServletRequest;
+
+@RequestMapping(value = "ticket")
 @Controller
 public class TicketController {
 
@@ -17,14 +19,16 @@ public class TicketController {
     private TicketService ticketService;
 
     @GetMapping
-    public String getAll(Model model) {
+    public String getAll(Model model, HttpServletRequest request) {
+        model.addAttribute("nama","Hi.. "+ request.getSession().getAttribute("id"));
         model.addAttribute("tickets", ticketService.getAll());
         return "ticket";
     }
 
     @PostMapping("save")
-    public String save(ReimburseDto reimburseDto){
+    public String save(ReimburseDto reimburseDto, HttpServletRequest request){
+        reimburseDto.setEmployeeId(request.getSession().getAttribute("id").toString());
         ticketService.save(reimburseDto);
-        return "";
+        return "redirect:/ticket";
     }
 }

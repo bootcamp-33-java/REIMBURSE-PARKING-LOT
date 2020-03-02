@@ -10,8 +10,9 @@ import com.bootcamp.ConsumeAPI.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
- *
  * @author Insane
  */
 
@@ -19,18 +20,26 @@ import org.springframework.stereotype.Service;
 public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
-    
-    public Employee getById(String id){
-        Employee employee=employeeRepository.findById(id).get();
-        
-        return employee;
-        
+
+    public Optional<Employee> getById(String id) {
+        return employeeRepository.findById(id);
+
+
     }
-    
-    public Employee save(Employee employee){
-        employeeRepository.save(employee);
-        
+
+    public Employee save(Employee employee) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(employee.getId());
+
+        if (!optionalEmployee.isPresent()) {
+            employeeRepository.save(employee);
+        } else {
+            Employee employee1 = optionalEmployee.get();
+            employee1.setRole(employee.getRole());
+
+            employeeRepository.save(employee1);
+        }
+
         return employee;
     }
-    
+
 }

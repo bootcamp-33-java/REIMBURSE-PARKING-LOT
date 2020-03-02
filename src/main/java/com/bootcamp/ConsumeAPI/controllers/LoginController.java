@@ -73,11 +73,12 @@ public class LoginController {
                 employee.setId(employeeLogin.getEmployee().getId());
                 employee.setEmail(employeeLogin.getEmployee().getEmail());
                 employee.setActive(true);
+                employee.setRole(employeeLogin.getEmployee().getRoles().get(0));
                 employee.setName(employeeLogin.getEmployee().getFirstName() +" " +employeeLogin.getEmployee().getLastName() );
                     employeeService.save(employee); //send ke database local
                 request.getSession().setAttribute("employee", employeeLogin.getEmployee().getFirstName() + " "
                         + employeeLogin.getEmployee().getLastName());
-                request.getSession().setAttribute("role", employeeLogin.getEmployee().getRoles());
+                request.getSession().setAttribute("role", employeeLogin.getEmployee().getRoles().get(0));
                 request.getSession().setAttribute("id", employeeLogin.getEmployee().getId());
                 System.out.println("NAMA : " + request.getSession().getAttribute("employee"));
                 System.out.println("ROLE : " + request.getSession().getAttribute("role"));

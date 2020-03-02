@@ -8,6 +8,7 @@ package com.bootcamp.ConsumeAPI.controllers;
 import com.bootcamp.ConsumeAPI.entities.Employee;
 import com.bootcamp.ConsumeAPI.entities.Vehicle;
 import com.bootcamp.ConsumeAPI.services.VehicleService;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,11 @@ public class VehicleController {
 
 
     @GetMapping("")
-    public String getAll(Model model) {
-        model.addAttribute("vehicles", service.getAll());
-        return "vehicle";
+    public String getAll(Model model, HttpServletRequest request){
+        model.addAttribute("nama","Hi.. "+ request.getSession().getAttribute("employee"));
+        model.addAttribute("vehicles",service.getAll(request.getSession().getAttribute("id").toString())) ;
+          return "vehicle";
     }
-//    @RequestMapping
 
     @PostMapping("save")
     public String save(@Valid Vehicle vehicle,HttpServletRequest request) {
@@ -48,10 +49,10 @@ public class VehicleController {
     }
 
     @GetMapping("/{id}")
-    public String getById(Model model, @PathVariable("id") String id) {
+    public String getById(Model model, @PathVariable("id") String id, HttpServletRequest request) {
 
         model.addAttribute("vehicle", service.getById(id));
-        model.addAttribute("vehicles", service.getAll());
+        model.addAttribute("vehicles", service.getAll(request.getSession().getAttribute("id").toString()));
         return "vehicle";
     }
 
@@ -59,7 +60,7 @@ public class VehicleController {
     public String delete(@PathVariable("id") String id) {
 
         service.delete(id);
-        return ("redirect:/");
+        return ("redirect:/vehicle");
     }
 
 }
