@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +25,12 @@ public class TicketService {
 
     @Autowired
     private HistoryService historyService;
+
+    @Autowired
+    private ParkingLotService parkingLotService;
+
+    @Autowired
+    private VehicleService vehicleService;
 
 
     public ReimburseDto save(ReimburseDto reimburseDto) {
@@ -69,8 +76,8 @@ public class TicketService {
         ticketRepository.save(ticket);
 
 
-        History history=new History();
-        Employee employee=new Employee();
+        History history = new History();
+        Employee employee = new Employee();
         employee.setId(reimburseDto.getEmployeeId());
         history.setApprovalBy(employee);
         history.setHistoryDate(new Date());
@@ -81,7 +88,6 @@ public class TicketService {
         history.setStatus(status);
 
         historyService.save(history);
-
 
 
         return reimburseDto;
@@ -117,10 +123,20 @@ public class TicketService {
         return ticket;
     }
 
-    public List<Ticket> getAll(String employeeId){
-        Optional<Reimburse> optionalReimburse=reimburseService.getEmployeeId(employeeId);
+    public List<Ticket> getAll(String employeeId) {
+        Optional<Reimburse> optionalReimburse = reimburseService.getEmployeeId(employeeId);
+        List<Ticket> ticketList = new ArrayList<>();
+        if (optionalReimburse.isPresent()) {
+            ticketList = ticketRepository.findAllByReimburse_Id(optionalReimburse.get().getId());
+        }
+        return ticketList;
+    }
 
+    public List<ParkingLot> getAllParkingLot() {
+        return parkingLotService.getAll();
+    }
 
-        return ticketRepository.findAllByReimburse_Id(optionalReimburse.get().getId());
+    public List<Vehicle> getAllVehicle(String employeeId) {
+        return vehicleService.getAll(employeeId);
     }
 }

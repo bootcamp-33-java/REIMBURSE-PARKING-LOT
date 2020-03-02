@@ -24,13 +24,11 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i>Vehicle Data Table</h1>
-                <p>Table to display vehicle data</p>
+                <h1><i class="fa fa-th-list"></i>Approval Data</h1>
+                <p>Table to display Approval Data</p>
             </div>
         </div>
-        <button type="button" class="btn  btn-info mb-2"  data-toggle="modal" data-target="#exampleModal" >
-            <i class="far fa fa-plus-square"></i>Add
-        </button>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
@@ -40,20 +38,20 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Number Plate</th>
-                                        <th>Vehicle Type</th>
-                                        <th>Stnk Owner</th>
-                                        <th>Photo Stnk</th>
+                                        <th>Employee</th>
+                                        <th>Period</th>
+                                        <th>Total</th>
+                                        <th>Notes</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="as : ${vehicles}">
+                                    <tr th:each="as : ${approvals}">
                                         <td></td>
-                                        <td th:text="${as.id}"></td>
-                                        <td th:text="${as.vehicleType}"></td>
-                                        <td th:text="${as.stnkOwner}"></td>
-                                        <td th:text="${as.photoStnk}"></td>
+                                        <td th:text="${as.employee.name}"></td>
+                                        <td th:text="${as.period}"></td>
+                                        <td th:text="${as.total}"></td>
+                                        <td th:text="${as.notes}"></td>
                                         <td>
 
                                             <button type="button" class="btn  btn-primary btn-sm"  data-toggle="modal" data-target="#updateModal" th:attr="data-target='#updateModal'+${as.id}">
@@ -63,7 +61,7 @@
                                                <button onclick="removeBtn(this.id)" type="button" class="btn  btn-danger btn-sm">
                                                     <i class="far fa fa-trash"></i>
                                                 </button></a>
-                                            <!--====================================MODAL UPATE==================================-->
+                                            <!--====================================MODAL Approve==================================-->
                                             <form th:action="@{save}" th:object="${vehicle}" method="post">
                                                 <div class="modal fade" th:id="updateModal+${as.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
@@ -122,56 +120,7 @@
             </div>
         </div>
     </main>
-    <!--==================================MODAL INSERT==================================-->
-    <form th:action="@{vehicle/save}" th:object="${vehicle}" method="post">
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Insert</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
 
-                    <div class="modal-body">
-
-                        <!--==================================Isi method Insert Modal====================================================================-->
-                        <table border="0" >
-                            <tbody>
-                                <tr>
-                                    <th>Number Plate</th>
-                                    <th><input type="text" id="id" name="id" class="form-control" /></th>
-                                </tr>
-                                <tr>
-                                    <td>Vehicle Type</td>
-                                    <td><input type="radio"  id="vehicleType" name="vehicleType" value="motorcycle" >
-                                        <label for="motorcycle">Motorcycle</label>
-                                        <input type="radio"  id="vehicleType" name="vehicleType" value="car" >
-                                        <label for="car">Car</label></td>
-                                </tr>
-                                <tr>
-                                    <td>STNK Owner</td>
-                                    <td><input type="text" id="stnkOwner" name="stnkOwner" class="form-control" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Photo STNK</td>
-                                    <td><input type="file"  id="photoStnk" name="photoStnk" class="form-control" /></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <!--==================================Button pada modal Insert====================================================================-->
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button onclick="setTimeout(okeBtn(), 1500);" type="submit" class="btn btn-primary"> Save </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    <!--===================================END MODAL INSERT=====================================-->
 
   <div th:replace="fragments/header::script"></div>
 </body>

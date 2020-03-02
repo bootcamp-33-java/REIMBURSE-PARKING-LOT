@@ -7,6 +7,7 @@ import com.bootcamp.ConsumeAPI.repositories.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +28,11 @@ public class HistoryService {
 
     public List<History> getAll(String employeeId) {
         Optional<Reimburse> optionalReimburse = reimburseService.getEmployeeId(employeeId);
+        List<History> historyList =new ArrayList<>();
+        if (optionalReimburse.isPresent()) {
 
-        List<History> historyList = historyRepository.findAllByReimburseId(optionalReimburse.get().getId());
+            historyList= historyRepository.findAllByReimburse_Id(optionalReimburse.get().getId());
+        }
 
         return historyList;
     }
