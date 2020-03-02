@@ -44,13 +44,7 @@ public class Employee implements Serializable {
     @Column(name = "is_active")
     private boolean isActive;
 
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
-    @JoinColumn(name = "site", referencedColumnName = "id")
+    @JoinColumn(name = "site", referencedColumnName = "id", nullable = true)
     @ManyToOne(fetch = FetchType.LAZY)
     private Site site;
 
