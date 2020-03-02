@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  * @author FIKRI-PC
  */
-@RequestMapping(value = "vehicle")
+@RequestMapping(value = "/vehicle")
 @Controller
 public class VehicleController {
 

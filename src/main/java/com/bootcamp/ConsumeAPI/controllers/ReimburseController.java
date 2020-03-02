@@ -19,6 +19,6 @@ public class ReimburseController {
     public String getAll(Model model, HttpServletRequest request) {
         model.addAttribute("nama", "Hi.. " + request.getSession().getAttribute("employee"));
         model.addAttribute("approvals", reimburseService.getByStatus(request.getSession().getAttribute("id").toString() ));
-        return "reimburse";
+        return "ticket";
     }
 }
