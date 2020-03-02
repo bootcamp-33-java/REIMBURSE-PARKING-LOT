@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
     <div th:replace="fragments/header::head"></div>
 </head>
 <body class="app sidebar-mini">
@@ -40,31 +40,35 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Number Plate</th>
-                                        <th>Vehicle Type</th>
-                                        <th>Stnk Owner</th>
-                                        <th>Photo Stnk</th>
+                                        <th>Ticket Id</th>
+                                        <th>Upload Date</th>
+                                        <th>Photo Ticket</th>
+                                        <th>Price</th>
+                                        <th>Vehicle</th>
+                                        <th>Parking Lot</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="as : ${reimburses}">
+                                    <tr th:each="as : ${tickets}">
                                         <td></td>
                                         <td th:text="${as.id}"></td>
-                                        <td th:text="${as.vehicleType}"></td>
-                                        <td th:text="${as.stnkOwner}"></td>
-                                        <td th:text="${as.photoStnk}"></td>
+                                        <td th:text="${as.uploadTicket}"></td>
+                                        <td th:text="${as.photoTicket}"></td>
+                                        <td th:text="${as.price}"></td>
+                                        <td th:text="${as.vehicle}"></td>
+                                        <td th:text="${as.parking}"></td>
                                         <td>
 
                                             <button type="button" class="btn  btn-primary btn-sm"  data-toggle="modal" data-target="#updateModal" th:attr="data-target='#updateModal'+${as.id}">
                                                 <i class="far fa fa-edit"></i>
                                             </button>
-                                            <a th:id="@{vehicle/delete/}+${as.id}"
-                                               <button onclick="removeBtn(this.id)" type="button" class="btn  btn-danger btn-sm">
-                                                    <i class="far fa fa-trash"></i>
-                                                </button></a>
+                                            <!--                                            <a th:id="@{vehicle/delete/}+${as.id}"
+                                                                                           <button onclick="removeBtn(this.id)" type="button" class="btn  btn-danger btn-sm">
+                                                                                                <i class="far fa fa-trash"></i>
+                                                                                            </button></a>-->
                                             <!--====================================MODAL UPATE==================================-->
-                                            <form th:action="@{save}" th:object="${vehicle}" method="post">
+                                            <form th:action="@{save}" th:object="${ticket}" method="post">
                                                 <div class="modal fade" th:id="updateModal+${as.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
@@ -123,7 +127,7 @@
         </div>
     </main>
     <!--==================================MODAL INSERT==================================-->
-    <form th:action="@{vehicle/save}" th:object="${vehicle}" method="post">
+    <form th:action="@{/ticket/save}" th:object="${ticket}" method="post">
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -140,25 +144,31 @@
                         <table border="0" >
                             <tbody>
                                 <tr>
-                                    <th>Number Plate</th>
-                                    <th><input type="text" id="id" name="id" class="form-control" /></th>
+                                    <th>Upload Date</th>
+                                    <th><input type="date" id="uploadDate" name="uploadDate" class="form-control" /></th>
                                 </tr>
                                 <tr>
-                                    <td>Vehicle Type</td>
-                                    <td><input type="radio"  id="vehicleType" name="vehicleType" value="motorcycle" >
-                                        <label for="motorcycle">Motorcycle</label>
-                                        <input type="radio"  id="vehicleType" name="vehicleType" value="car" >
-                                        <label for="car">Car</label></td>
+                                    <td>Photo Ticket</td>
+                                    <th><input type="file" id="photoTicket" name="photoTicket" class="form-control" /></th>
                                 </tr>
                                 <tr>
-                                    <td>STNK Owner</td>
-                                    <td><input type="text" id="stnkOwner" name="stnkOwner" class="form-control" /></td>
+                                    <td>Price</td>
+                                    <td><input type="text" id="price" name="price" class="form-control" /></td>
                                 </tr>
-                                <tr>
-                                    <td>Photo STNK</td>
-                                    <td><input type="file"  id="photoStnk" name="photoStnk" class="form-control" /></td>
+                                <!--<tr>-->
+<!--                                    <td>Vehicle</td>
+                                    <td> <select th:field="*{vehicle}">
+                                            <option th:each="v : ${vehicles}" th:value="${v.id}" th:text="${v.vehicleType}">
+                                            </option>
+                                        </select></td>
                                 </tr>
-
+                            <td>Parking Lot</td>
+                            <td>
+                                <select th:field="*{parking}">
+                                    <option th:each="p : ${parkings}" th:value="${p.id}" th:text="${p.name}">
+                                    </option>
+                                </select>
+                            </td>-->
                             </tbody>
                         </table>
                     </div>
@@ -173,7 +183,7 @@
     </form>
     <!--===================================END MODAL INSERT=====================================-->
 
-  <div th:replace="fragments/header::script"></div>
+    <div th:replace="fragments/header::script"></div>
 </body>
 
 
