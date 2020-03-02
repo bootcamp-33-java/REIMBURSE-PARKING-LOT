@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -113,5 +114,9 @@ public class TicketService {
         }
 
         return ticket;
+    }
+
+    public List<Ticket> getAll(){
+        return ticketRepository.findAll();
     }
 }
