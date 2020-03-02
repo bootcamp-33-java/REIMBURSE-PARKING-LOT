@@ -25,6 +25,7 @@ public class TicketService {
     @Autowired
     private HistoryService historyService;
 
+
     public ReimburseDto save(ReimburseDto reimburseDto) {
         SimpleDateFormat frmt = new SimpleDateFormat("MMMM yyyy");
         String period = frmt.format(reimburseDto.getTicket().getUploadDate());
@@ -116,7 +117,10 @@ public class TicketService {
         return ticket;
     }
 
-    public List<Ticket> getAll(){
-        return ticketRepository.findAll();
+    public List<Ticket> getAll(String employeeId){
+        Optional<Reimburse> optionalReimburse=reimburseService.getEmployeeId(employeeId);
+
+
+        return ticketRepository.findAllByReimburse_Id(optionalReimburse.get().getId());
     }
 }

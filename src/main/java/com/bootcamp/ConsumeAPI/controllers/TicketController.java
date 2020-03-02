@@ -21,7 +21,7 @@ public class TicketController {
     @GetMapping
     public String getAll(Model model, HttpServletRequest request) {
         model.addAttribute("nama","Hi.. "+ request.getSession().getAttribute("id"));
-        model.addAttribute("tickets", ticketService.getAll());
+        model.addAttribute("tickets", ticketService.getAll(request.getSession().getAttribute("id").toString()));
         return "ticket";
     }
 
