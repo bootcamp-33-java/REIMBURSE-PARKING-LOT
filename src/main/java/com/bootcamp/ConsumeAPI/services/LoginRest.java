@@ -5,8 +5,11 @@
  */
 package com.bootcamp.ConsumeAPI.services;
 
+import com.bootcamp.ConsumeAPI.entities.Employee;
 import com.bootcamp.ConsumeAPI.entities.EmployeeLogin;
 import com.bootcamp.ConsumeAPI.entities.LoginData;
+import com.bootcamp.ConsumeAPI.repositories.LoginRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -30,6 +33,9 @@ public class LoginRest {
     @Value("${data.api.key}")
     private String key;
     private static final RestTemplate restTemplate = new RestTemplate();
+    
+    @Autowired
+    LoginRepository repository;
 
     private HttpHeaders getHeaders() {
         return new HttpHeaders() {
@@ -55,4 +61,5 @@ public class LoginRest {
 
         return result;
     }
+    
 }

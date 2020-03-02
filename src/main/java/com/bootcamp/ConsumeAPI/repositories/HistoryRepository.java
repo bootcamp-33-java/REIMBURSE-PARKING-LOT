@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface HistoryRepository extends PagingAndSortingRepository<History, Integer> {
-    List<History> findAll();
+    List<History> findAllByReimburseId(String reimburseId);
 }
