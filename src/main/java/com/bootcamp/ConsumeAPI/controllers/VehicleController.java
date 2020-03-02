@@ -8,6 +8,8 @@ package com.bootcamp.ConsumeAPI.controllers;
 import com.bootcamp.ConsumeAPI.entities.Employee;
 import com.bootcamp.ConsumeAPI.entities.Vehicle;
 import com.bootcamp.ConsumeAPI.services.VehicleService;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +30,8 @@ public class VehicleController {
     VehicleService service;
     
     @GetMapping("")
-    public String getAll(Model model){
+    public String getAll(Model model, HttpServletRequest request){
+        model.addAttribute("nama","Hi.. "+ request.getSession().getAttribute("employee"));
         model.addAttribute("vehicles",service.getAll()) ;
           return "vehicle";
     }
