@@ -55,4 +55,9 @@ public class ReimburseService {
         }
         return reimburseList;
     }
+
+    public Optional<Reimburse> getEmployeeId(String employeeId){
+        return reimburseRepository.findByEmployee_Id(employeeId);
+    }
+
 }

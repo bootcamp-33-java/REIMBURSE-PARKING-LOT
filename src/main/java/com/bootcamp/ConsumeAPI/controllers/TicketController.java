@@ -20,13 +20,14 @@ public class TicketController {
 
     @GetMapping
     public String getAll(Model model, HttpServletRequest request) {
-        model.addAttribute("nama","Hi.. "+ request.getSession().getAttribute("employee"));
+        model.addAttribute("nama","Hi.. "+ request.getSession().getAttribute("id"));
         model.addAttribute("tickets", ticketService.getAll());
         return "ticket";
     }
 
     @PostMapping("save")
-    public String save(ReimburseDto reimburseDto){
+    public String save(ReimburseDto reimburseDto, HttpServletRequest request){
+        reimburseDto.setEmployeeId(request.getSession().getAttribute("id").toString());
         ticketService.save(reimburseDto);
         return "redirect:/ticket";
     }
