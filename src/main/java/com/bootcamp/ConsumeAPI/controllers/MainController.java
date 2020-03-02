@@ -19,7 +19,8 @@ public class MainController {
     
     @RequestMapping("/")
     public String home(Model model,HttpServletRequest request){
-        model.addAttribute("nama","Hi.. "+ request.getSession().getAttribute("employee"));
+        model.addAttribute("nama",request.getSession().getAttribute("employee"));
+        model.addAttribute("peran",request.getSession().getAttribute("role"));
     
         return "dashboard";
     }
