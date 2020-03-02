@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface VehicleRepository extends PagingAndSortingRepository<Vehicle, String> {
-    List<Vehicle> findAll();
+    List<Vehicle> findAllByEmployee_Id(String employeeId);
   
     Optional<Vehicle> findById(String id);
 }

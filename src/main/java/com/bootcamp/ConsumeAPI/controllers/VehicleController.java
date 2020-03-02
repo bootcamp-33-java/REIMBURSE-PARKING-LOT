@@ -34,10 +34,9 @@ public class VehicleController {
     @GetMapping("")
     public String getAll(Model model, HttpServletRequest request){
         model.addAttribute("nama","Hi.. "+ request.getSession().getAttribute("employee"));
-        model.addAttribute("vehicles",service.getAll()) ;
+        model.addAttribute("vehicles",service.getAll(request.getSession().getAttribute("id").toString())) ;
           return "vehicle";
     }
-//    @RequestMapping
 
     @PostMapping("save")
     public String save(@Valid Vehicle vehicle,HttpServletRequest request) {
@@ -46,14 +45,14 @@ public class VehicleController {
         employee.setId(request.getSession().getAttribute("id").toString());
         vehicle.setEmployee(employee);
         service.save(vehicle);
-        return ("redirect:/vehicle");
+        return ("vehicle");
     }
 
     @GetMapping("/{id}")
-    public String getById(Model model, @PathVariable("id") String id) {
+    public String getById(Model model, @PathVariable("id") String id, HttpServletRequest request) {
 
         model.addAttribute("vehicle", service.getById(id));
-        model.addAttribute("vehicles", service.getAll());
+        model.addAttribute("vehicles", service.getAll(request.getSession().getAttribute("id").toString()));
         return "vehicle";
     }
 

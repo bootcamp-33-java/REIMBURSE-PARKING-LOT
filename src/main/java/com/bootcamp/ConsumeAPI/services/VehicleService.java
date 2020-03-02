@@ -23,8 +23,8 @@ public class VehicleService {
         @Autowired
         VehicleRepository repository;
 
-    public List<Vehicle> getAll() {
-        return repository.findAll();
+    public List<Vehicle> getAll(String employeeId) {
+        return repository.findAllByEmployee_Id(employeeId);
     }
 
     public Vehicle save(Vehicle vehicle) {
