@@ -43,7 +43,7 @@ public class TicketController {
         ReimburseDto reimburseDto = new ReimburseDto();
         reimburseDto.setEmployeeId(request.getSession().getAttribute("id").toString());
         ticket.setPhotoTicket("photo");
-        ticket.setUploadDate(parseDate(ticket.getUploadDate().toString()));
+        ticket.setUploadDate(ticket.getUploadDate());
         reimburseDto.setTicket(ticket);
         ticketService.save(reimburseDto);
         return "redirect:/ticket";
@@ -56,7 +56,4 @@ public class TicketController {
         return "redirect:/ticket";
     }
 
-    private LocalDate parseDate(String value) {
-        return LocalDate.parse(value, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-    }
 }

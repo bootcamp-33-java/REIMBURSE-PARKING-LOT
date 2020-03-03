@@ -26,8 +26,6 @@ public class Ticket implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
 
