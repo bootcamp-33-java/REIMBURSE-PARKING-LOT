@@ -19,36 +19,36 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
- *
  * @author FIKRI-PC
  */
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
-    
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private UserDetailsService service;
-    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(service).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
-    
+
     @Override
-    protected void configure (HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .headers()
                 .frameOptions().sameOrigin()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/verification").permitAll()
+                .antMatchers("/approval").hasAnyAuthority("Admin").antMatchers("/approval").hasAnyAuthority("Manager")
                 .antMatchers("/").authenticated()
-                .antMatchers("/index/**").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -66,6 +66,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .rememberMeCookieName("my-remember-me-cookies")
                 .and()
                 .exceptionHandling();
-                
+
     }
 }

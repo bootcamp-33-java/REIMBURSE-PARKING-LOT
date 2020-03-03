@@ -18,6 +18,7 @@ import java.util.Optional;
 
 @Service
 public class EmployeeService {
+
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -40,6 +41,10 @@ public class EmployeeService {
         }
 
         return employee;
+    }
+
+    public Optional<Employee> getRole(String role){
+        return employeeRepository.findByRole(role);
     }
 
 }

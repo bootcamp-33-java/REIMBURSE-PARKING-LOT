@@ -138,8 +138,8 @@
         </div>
     </div>
 </main>
-<!--==================================MODAL INSERT==================================-->
-<form th:action="@{ticket/save}" th:object="${reimburseDto}" method="post" enctype="multipart/form-data">
+<!--==================================MODAL INSERT //enctype="multipart/form-data"==================================-->
+<form th:action="@{ticket/save}" th:object="${ticket}" method="post" >
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">

@@ -6,12 +6,13 @@
 package com.bootcamp.ConsumeAPI.entities;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * @author Yuyun
@@ -28,17 +29,13 @@ public class Reimburse implements Serializable {
     @Column(name = "id")
     private String id;
 
-    @Basic(optional = false)
-    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "start_date")
-    @Temporal(TemporalType.DATE)
-    private Date startDate;
+    private LocalDate startDate;
 
-    @Basic(optional = false)
-    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "end_date")
-    @Temporal(TemporalType.DATE)
-    private Date endDate;
+    private LocalDate endDate;
 
     @Basic(optional = false)
     @NotNull
