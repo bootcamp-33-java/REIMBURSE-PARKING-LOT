@@ -18,6 +18,7 @@ public class ReimburseController {
     @GetMapping("")
     public String getAll(Model model, HttpServletRequest request) {
         model.addAttribute("nama",  request.getSession().getAttribute("employee"));
+        model.addAttribute("peran",request.getSession().getAttribute("role"));
         model.addAttribute("approvals", reimburseService.getByStatus(request.getSession().getAttribute("id").toString() ));
         return "approval";
     }

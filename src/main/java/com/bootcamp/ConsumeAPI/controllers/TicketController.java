@@ -23,6 +23,7 @@ public class TicketController {
     @GetMapping
     public String getAll(Model model, HttpServletRequest request) {
         model.addAttribute("nama", request.getSession().getAttribute("id"));
+        model.addAttribute("peran",request.getSession().getAttribute("role"));
         model.addAttribute("parkLots", ticketService.getAllParkingLot());
         model.addAttribute("vehicles", ticketService.getAllVehicle(request.getSession().getAttribute("id").toString()));
         model.addAttribute("tickets", ticketService.getAll(request.getSession().getAttribute("id").toString()));
@@ -32,9 +33,9 @@ public class TicketController {
     @PostMapping("save")
     public String save(ReimburseDto reimburseDto, HttpServletRequest request) {
         reimburseDto.setEmployeeId(request.getSession().getAttribute("id").toString());
-        Ticket ticket=reimburseDto.getTicket();
-        ticket.setPhotoTicket("photo");
-        reimburseDto.setTicket(ticket);
+        Ticket ticket1=reimburseDto.getTicket();
+        ticket1.setPhotoTicket("photo");
+        reimburseDto.setTicket(ticket1);
         ticketService.save(reimburseDto);
         return "redirect:/ticket";
     }
