@@ -25,7 +25,7 @@ import java.util.Date;
 public class History implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "increment")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     @Basic(optional = false)
     @NotNull

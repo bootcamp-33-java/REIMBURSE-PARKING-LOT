@@ -7,12 +7,13 @@ package com.bootcamp.ConsumeAPI.entities;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * @author Yuyun
@@ -23,18 +24,16 @@ import java.util.Date;
 public class Ticket implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "increment")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Integer id;
 
-    @Basic(optional = false)
-    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "upload_date")
-    @Temporal(TemporalType.DATE)
-    private Date uploadDate;
+    private LocalDate uploadDate;
 
     @Basic(optional = false)
     @NotNull

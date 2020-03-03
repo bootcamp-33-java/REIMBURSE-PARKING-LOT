@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,10 +36,10 @@ public class TicketService {
 
 
     public ReimburseDto save(ReimburseDto reimburseDto) {
-        SimpleDateFormat frmt = new SimpleDateFormat("MMMM yyyy");
-        String period = frmt.format(reimburseDto.getTicket().getUploadDate());
-        SimpleDateFormat formt = new SimpleDateFormat("MMyyyy");
-        String id = formt.format(reimburseDto.getTicket().getUploadDate());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        String period = reimburseDto.getTicket().getUploadDate().format(formatter);
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("MMyyyy");
+        String id = reimburseDto.getTicket().getUploadDate().format(formatter1);
 
         String idReimburse = reimburseDto.getEmployeeId() + id;
 
@@ -139,4 +141,6 @@ public class TicketService {
     public List<Vehicle> getAllVehicle(String employeeId) {
         return vehicleService.getAll(employeeId);
     }
+
+
 }

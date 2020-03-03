@@ -4,14 +4,17 @@ import com.bootcamp.ConsumeAPI.entities.ReimburseDto;
 import com.bootcamp.ConsumeAPI.entities.Ticket;
 import com.bootcamp.ConsumeAPI.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @RequestMapping(value = "ticket")
 @Controller
@@ -20,9 +23,15 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder) {
+//        binder.registerCustomEditor(LocalDate.class, new CustomDateEditor(new SimpleDateFormat("MM/dd/yyyy"), true));
+//    }
+
     @GetMapping
     public String getAll(Model model, HttpServletRequest request) {
-        model.addAttribute("nama", request.getSession().getAttribute("id"));
+        model.addAttribute("nama", request.getSession().getAttribute("employee"));
+        model.addAttribute("peran", request.getSession().getAttribute("role"));
         model.addAttribute("parkLots", ticketService.getAllParkingLot());
         model.addAttribute("vehicles", ticketService.getAllVehicle(request.getSession().getAttribute("id").toString()));
         model.addAttribute("tickets", ticketService.getAll(request.getSession().getAttribute("id").toString()));
@@ -30,10 +39,11 @@ public class TicketController {
     }
 
     @PostMapping("save")
-    public String save(ReimburseDto reimburseDto, HttpServletRequest request) {
+    public String save(@Valid Ticket ticket, HttpServletRequest request) {
+        ReimburseDto reimburseDto = new ReimburseDto();
         reimburseDto.setEmployeeId(request.getSession().getAttribute("id").toString());
-        Ticket ticket=reimburseDto.getTicket();
         ticket.setPhotoTicket("photo");
+        ticket.setUploadDate(parseDate(ticket.getUploadDate().toString()));
         reimburseDto.setTicket(ticket);
         ticketService.save(reimburseDto);
         return "redirect:/ticket";
@@ -44,5 +54,9 @@ public class TicketController {
         ticketService.update(ticketEntity);
 
         return "redirect:/ticket";
+    }
+
+    private LocalDate parseDate(String value) {
+        return LocalDate.parse(value, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
     }
 }

@@ -34,6 +34,7 @@ public class VehicleController {
     @GetMapping("")
     public String getAll(Model model, HttpServletRequest request){
         model.addAttribute("nama", request.getSession().getAttribute("employee"));
+        model.addAttribute("peran",request.getSession().getAttribute("role"));
         model.addAttribute("vehicles",service.getAll(request.getSession().getAttribute("id").toString())) ;
           return "vehicle";
     }

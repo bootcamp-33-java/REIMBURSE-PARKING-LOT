@@ -22,7 +22,7 @@ import java.io.Serializable;
 public class Status implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "increment")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     @Basic(optional = false)
     @NotNull

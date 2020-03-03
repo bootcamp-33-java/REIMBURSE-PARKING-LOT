@@ -22,13 +22,17 @@ public class ReimburseController {
     @GetMapping("")
     public String getAll(Model model, HttpServletRequest request) {
         model.addAttribute("nama",  request.getSession().getAttribute("employee"));
+        model.addAttribute("peran",request.getSession().getAttribute("role"));
         model.addAttribute("approvals", reimburseService.getByStatus(request.getSession().getAttribute("id").toString() ));
         return "approval";
     }
 
-    @PutMapping("update/{action}")
-    public String updateStatus(@Valid UpdateStatusDto updateStatusDto, @PathVariable String action){
+    @PutMapping("update/{id}/{action}")
+    public String updateStatus(HttpServletRequest request, @PathVariable String action, @PathVariable String id){
+        UpdateStatusDto updateStatusDto=new UpdateStatusDto();
         updateStatusDto.setStatus(action);
+        updateStatusDto.setId(id);
+        updateStatusDto.setRole(request.getSession().getAttribute("role").toString());
         reimburseService.updateStatus(updateStatusDto);
 
         return "redirect:/approval";
