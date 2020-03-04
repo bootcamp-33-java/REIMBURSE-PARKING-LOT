@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <div th:replace="fragments/header::head"></div>
 </head>
@@ -63,7 +63,7 @@
                                             data-target="#updateModal" th:attr="data-target='#updateModal'+${as.id}">
                                         <i class="far fa fa-edit"></i>
                                     </button>
-                                    <a th:id="@{vehicle/delete/}+${as.id}"
+                                    <a th:id="@{vehicle/delete/}+${as.id}">
                                     <button onclick="removeBtn(this.id)" type="button" class="btn  btn-danger btn-sm">
                                         <i class="far fa fa-trash"></i>
                                     </button>

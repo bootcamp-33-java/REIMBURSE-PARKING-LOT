@@ -43,8 +43,4 @@ public class EmployeeService {
         return employee;
     }
 
-    public Optional<Employee> getRole(String role){
-        return employeeRepository.findByRole(role);
-    }
-
 }

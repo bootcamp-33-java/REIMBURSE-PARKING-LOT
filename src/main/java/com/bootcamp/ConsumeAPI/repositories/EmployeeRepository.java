@@ -11,6 +11,4 @@ import java.util.Optional;
 @Repository
 public interface EmployeeRepository extends PagingAndSortingRepository<Employee, String> {
     List<Employee> findAll();
-
-    Optional<Employee> findByRole(String role);
 }

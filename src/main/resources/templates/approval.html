@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
     <div th:replace="fragments/header::head"></div>
 </head>
@@ -56,12 +56,12 @@
                                             <button data-toggle="modal" data-target="#updateModalapproved" type="button" class="btn btn-success btn-sm">Approved</button></a>
                                             <button data-toggle="modal" data-target="#updateModalreject"type="button" class="btn btn-danger btn-sm">Rejected</button></a>
                                             
-                                            <form action="@{approval/update/{id}(id=${as.id})/{action}(action='approved')}" method="POST">
+                                            <form th:action="@{approval/update/{action}(action='approved')}" th:object="${updateStatusDto}" method="POST">
                                                 <div class="modal fade" id="updateModalapproved" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Give a Notes</h5>
+                                                                <h5 class="modal-title" id="exampleModal">Give a Notes</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -73,7 +73,7 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <td>Notes</td>
-                                                                            <td><textarea rows="4" cols="40" name="note" ></textarea></td>
+                                                                            <td><textarea rows="4" cols="40"  name="notes" id="notes"></textarea></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td colspan="2"><input type="hidden" readonly=""  name="id" th:value="${as.id}"  /></td>
@@ -92,7 +92,7 @@
                                             </form>
 
                                             <!--modal reject-->
-                                            <form action="@{approval/update/{id}(id=${as.id})/{action}(action='reject')}" method="POST">
+                                            <form th:action="@{approval/update/{action}(action='reject')}" th:object="${updateStatusDto}" method="POST">
                                                 <div class="modal fade" id="updateModalreject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
@@ -109,7 +109,7 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <td>Notes</td>
-                                                                            <td><textarea rows="4" cols="40" name="note" ></textarea></td>
+                                                                            <td><textarea rows="4" cols="40" name="notes" id="notes" ></textarea></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td colspan="2"><input type="hidden" readonly=""  name="id" th:value="${as.id}"  /></td>

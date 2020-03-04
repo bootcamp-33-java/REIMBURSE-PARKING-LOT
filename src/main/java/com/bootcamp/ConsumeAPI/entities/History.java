@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * @author Yuyun
@@ -40,7 +41,7 @@ public class History implements Serializable {
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "history_date")
-    private LocalDate historyDate;
+    private LocalDateTime historyDate;
 
     @JoinColumn(name = "approval_by", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -61,7 +62,7 @@ public class History implements Serializable {
         this.id = id;
     }
 
-    public History(Integer id, LocalDate historyDate) {
+    public History(Integer id, LocalDateTime historyDate) {
         this.id = id;
         this.historyDate = historyDate;
     }
@@ -82,11 +83,11 @@ public class History implements Serializable {
         this.notes = notes;
     }
 
-    public LocalDate getHistoryDate() {
+    public LocalDateTime getHistoryDate() {
         return historyDate;
     }
 
-    public void setHistoryDate(LocalDate historyDate) {
+    public void setHistoryDate(LocalDateTime historyDate) {
         this.historyDate = historyDate;
     }
 

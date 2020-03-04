@@ -1,19 +1,18 @@
 package com.bootcamp.ConsumeAPI.services;
 
 
-import com.bootcamp.ConsumeAPI.entities.Employee;
-import com.bootcamp.ConsumeAPI.entities.Reimburse;
-import com.bootcamp.ConsumeAPI.entities.Status;
-import com.bootcamp.ConsumeAPI.entities.UpdateStatusDto;
+import com.bootcamp.ConsumeAPI.entities.*;
 import com.bootcamp.ConsumeAPI.repositories.ReimburseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class ReimburseService {
 
     @Autowired
@@ -21,6 +20,9 @@ public class ReimburseService {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private HistoryService historyService;
 
     public Reimburse save(Reimburse reimburse) {
         Employee employee = new Employee(reimburse.getEmployee().getId());
@@ -60,11 +62,18 @@ public class ReimburseService {
         Reimburse reimburse = new Reimburse();
         Optional<Reimburse> optionalReimburse = reimburseRepository.findById(updateStatusDto.getId());
 
-        Optional<Employee> optionalEmployee = employeeService.getRole(updateStatusDto.getRole());
+        Optional<Employee> optionalEmployee = employeeService.getById(updateStatusDto.getEmployeeId());
 
         if (optionalReimburse.isPresent()) {
             reimburse = optionalReimburse.get();
+
             Status status = new Status();
+
+            History history = new History();
+            history.setId(0);
+            history.setNotes(updateStatusDto.getNotes());
+            history.setReimburse(reimburse);
+            history.setApprovalBy(optionalEmployee.get());
 
             if (optionalEmployee.isPresent()) {
                 if (updateStatusDto.getStatus().equalsIgnoreCase("approved")) {
@@ -74,9 +83,11 @@ public class ReimburseService {
                         reimburse.setNotes(updateStatusDto.getNotes());
                         reimburseRepository.save(reimburse);
 
+                        history.setStatus(status);
+                        historyService.save(history);
+
                         status.setId(2);
                         reimburse.setCurrentStatus(status);
-                        reimburse.setNotes(updateStatusDto.getNotes());
                         reimburseRepository.save(reimburse);
 
                     } else if (optionalEmployee.get().getRole().equalsIgnoreCase("admin")) {
@@ -99,6 +110,10 @@ public class ReimburseService {
                     }
                 }
             }
+
+            history.setStatus(status);
+            historyService.save(history);
+
         }
         return reimburse;
     }

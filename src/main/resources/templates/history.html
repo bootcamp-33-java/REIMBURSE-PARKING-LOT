@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <div th:replace="fragments/header::head"></div>
 </head>
@@ -50,9 +50,9 @@
                                         <td></td>
                                         <td th:text="${as.reimburse.period}"></td>
                                         <td th:text="${as.historyDate}"></td>
-                                        <td th:text="${as.status}"></td>
+                                        <td th:text="${as.status.name}"></td>
                                         <td th:text="${as.notes}"></td>
-                                        <td th:text="${as.approvalBy}"></td>
+                                        <td th:text="${as.approvalBy.id}+' - '+${as.approvalBy.name}"></td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -5,10 +5,7 @@ import com.bootcamp.ConsumeAPI.services.ReimburseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -27,12 +24,10 @@ public class ReimburseController {
         return "approval";
     }
 
-    @PutMapping("update/{id}/{action}")
-    public String updateStatus(HttpServletRequest request, @PathVariable String action, @PathVariable String id){
-        UpdateStatusDto updateStatusDto=new UpdateStatusDto();
+    @PostMapping("update/{action}")
+    public String updateStatus(HttpServletRequest request, @Valid UpdateStatusDto updateStatusDto,  @PathVariable String action){
         updateStatusDto.setStatus(action);
-        updateStatusDto.setId(id);
-        updateStatusDto.setRole(request.getSession().getAttribute("role").toString());
+        updateStatusDto.setEmployeeId(request.getSession().getAttribute("id").toString());
         reimburseService.updateStatus(updateStatusDto);
 
         return "redirect:/approval";

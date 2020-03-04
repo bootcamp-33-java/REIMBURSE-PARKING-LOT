@@ -38,24 +38,20 @@
         </div>
 
         <ul class="app-menu">
-            <li><a class="app-menuitem active" th:href="@{/}"><i class="app-menuicon fa fa-dashboard"></i><span
-                    class="app-menulabel">Dashboard</span></a></li>
-            <li><a class="app-menuitem" th:if="${peran == 'Employee'}" th:href="@{vehicle}"><i
-                    class="app-menuicon fa fa-edit"></i><span class="app-menulabel">Vehicle Data</span></a></li>
-            <li><a class="app-menuitem" th:if="${peran == 'Manager'}" th:href="@{vehicle}"><i
-                    class="app-menuicon fa fa-edit"></i><span class="app-menulabel">Vehicle Data</span></a></li>
-            <li><a class="app-menuitem" th:if="${peran == 'Employee'}" th:href="@{ticket}"><i
-                    class="app-menuicon fa fa-edit"></i><span class="app-menulabel">Reimburse</span></a></li>
-            <li><a class="app-menuitem" th:if="${peran == 'Manager'}" th:href="@{ticket}"><i
-                    class="app-menuicon fa fa-edit"></i><span class="app-menulabel">Reimburse</span></a></li>
-            <li><a class="app-menuitem" th:if="${peran == 'Manager'}" th:href="@{approval}"><i
-                    class="app-menuicon fa fa-edit"></i><span class="app-menulabel">Approval</span></a></li>
-            <li><a class="app-menuitem" th:if="${peran == 'Admin'}" th:href="@{approval}"><i
-                    class="app-menuicon fa fa-edit"></i><span class="app-menulabel">Approval</span></a></li>
-            <li><a class="app-menuitem" th:if="${peran == 'Employee'}" th:href="@{history}"><i
-                    class="app-menuicon fa fa-th-list"></i><span class="app-menulabel">History</span></a></li>
-            <li><a class="app-menuitem" th:if="${peran == 'Manager'}" th:href="@{history}"><i
-                    class="app-menuicon fa fa-th-list"></i><span class="app-menu__label">History</span></a></li>
+            <li><a class="app-menu__item active" th:href="@{/}"><i class="app-menu__icon fa fa-dashboard"></i><span
+                    class="app-menu__label">Dashboard</span></a></li>
+            <li><a class="app-menu__item" th:if="${peran == 'Employee' || peran == 'Manager' || peran=='Trainer' }"
+                   th:href="@{vehicle}"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Vehicle Data</span></a>
+            </li>
+            <li><a class="app-menu__item" th:if="${peran == 'Employee' || peran == 'Manager' || peran=='Trainer' }"
+                   th:href="@{ticket}"><i class="app-menu__icon fa fa-edit"></i><span
+                    class="app-menu__label">Reimburse</span></a></li>
+            <li><a class="app-menu__item" th:if="${peran == 'Admin' || peran == 'Manager' || peran=='Trainer' }"
+                   th:href="@{approval}"><i class="app-menu__icon fa fa-edit"></i><span
+                    class="app-menu__label">Approval</span></a></li>
+            <li><a class="app-menu__item" th:if="${peran == 'Employee' || peran == 'Manager' || peran=='Trainer' }"
+                   th:href="@{history}"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">History</span></a>
+            </li>
         </ul>
     </aside>
 
