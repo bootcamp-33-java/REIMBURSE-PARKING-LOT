@@ -13,17 +13,29 @@ import java.util.List;
  */
 public class EmployeeAPI {
     private List<String> roles;
+
     private String id;
+
     private String firstName;
+
     private String lastName;
+
     private String email;
+
     private String birthDate;
+
     private String birthPlace;
+
     private String gender;
+
     private String isDelete;
+
     private EmployeeAPI manager;
+
     private String department;
+
     private String nationality;
+
 
     public List<String> getRoles() {
         return roles;

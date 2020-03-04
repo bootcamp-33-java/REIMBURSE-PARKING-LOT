@@ -42,9 +42,7 @@ public class VehicleController {
     @PostMapping("save")
     public String save(@Valid Vehicle vehicle,HttpServletRequest request) {
         vehicle.setPhotoStnk("poto");
-        Employee employee = new Employee();
-        employee.setId(request.getSession().getAttribute("id").toString());
-        vehicle.setEmployee(employee);
+        vehicle.setEmployee(new Employee(request.getSession().getAttribute("id").toString()));
         service.save(vehicle);
         return ("redirect:/vehicle");
     }

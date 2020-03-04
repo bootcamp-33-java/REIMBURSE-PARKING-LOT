@@ -1,34 +1,28 @@
 package com.bootcamp.ConsumeAPI.controllers;
 
+import com.bootcamp.ConsumeAPI.entities.Employee;
 import com.bootcamp.ConsumeAPI.entities.ReimburseDto;
 import com.bootcamp.ConsumeAPI.entities.Ticket;
 import com.bootcamp.ConsumeAPI.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-@RequestMapping(value = "ticket")
+@RequestMapping(value = "/ticket")
 @Controller
 public class TicketController {
 
     @Autowired
     private TicketService ticketService;
 
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder) {
-//        binder.registerCustomEditor(LocalDate.class, new CustomDateEditor(new SimpleDateFormat("MM/dd/yyyy"), true));
-//    }
-
-    @GetMapping
+    @GetMapping("")
     public String getAll(Model model, HttpServletRequest request) {
         model.addAttribute("nama", request.getSession().getAttribute("employee"));
         model.addAttribute("peran", request.getSession().getAttribute("role"));
@@ -41,12 +35,10 @@ public class TicketController {
     @PostMapping("save")
     public String save(@Valid Ticket ticket, HttpServletRequest request) {
         ReimburseDto reimburseDto = new ReimburseDto();
-        reimburseDto.setEmployeeId(request.getSession().getAttribute("id").toString());
-        ticket.setPhotoTicket("photo");
-        ticket.setUploadDate(ticket.getUploadDate());
+        reimburseDto.setEmployee(new Employee(request.getSession().getAttribute("id").toString()));
         reimburseDto.setTicket(ticket);
         ticketService.save(reimburseDto);
-        return "redirect:/ticket";
+        return ("redirect:/ticket");
     }
 
     @PutMapping("update")
