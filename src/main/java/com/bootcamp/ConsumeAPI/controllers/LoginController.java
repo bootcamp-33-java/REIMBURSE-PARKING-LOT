@@ -83,6 +83,7 @@ public class LoginController {
                         + employeeLogin.getEmployee().getLastName());
                 request.getSession().setAttribute("role", employeeLogin.getEmployee().getRoles());
                 request.getSession().setAttribute("id", employeeLogin.getEmployee().getId());
+                
                 System.out.println("NAMA : " + request.getSession().getAttribute("employee"));
                 System.out.println("ROLE : " + request.getSession().getAttribute("role"));
                 System.out.println("ID : " + request.getSession().getAttribute("id"));

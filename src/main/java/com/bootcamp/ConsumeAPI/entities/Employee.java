@@ -42,7 +42,6 @@ public class Employee implements Serializable {
     @Size(min = 1, max = 5)
     @Column(name = "id")
     private String id;
-
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -55,7 +54,6 @@ public class Employee implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "email")
     private String email;
-
     @Basic(optional = false)
     @NotNull
     @Column(name = "is_active")
@@ -73,6 +71,12 @@ public class Employee implements Serializable {
     @JoinColumn(name = "site", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Site site;
+    @OneToMany(mappedBy = "approvalBy", fetch = FetchType.LAZY)
+    private List<History> historyList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<Vehicle> vehicleList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<Reimburse> reimburseList;
 
     @OneToMany(mappedBy = "approvalBy", fetch = FetchType.LAZY)
     private List<History> historyList;

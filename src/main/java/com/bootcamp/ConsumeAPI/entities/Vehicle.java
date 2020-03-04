@@ -42,19 +42,16 @@ public class Vehicle implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "id")
     private String id;
-
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "vehicle_type")
     private String vehicleType;
-
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "stnk_owner")
     private String stnkOwner;
-
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)

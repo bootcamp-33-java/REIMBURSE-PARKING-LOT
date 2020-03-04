@@ -16,7 +16,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
- * @author Yuyun
+ *
+ * @author FIKRI-PC
  */
 @Entity
 @Table(name = "tb_tr_history")
@@ -35,7 +36,6 @@ public class History implements Serializable {
     @Size(max = 255)
     @Column(name = "notes")
     private String notes;
-
     @Basic(optional = false)
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -45,10 +45,12 @@ public class History implements Serializable {
     @JoinColumn(name = "approval_by", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Employee approvalBy;
-
     @JoinColumn(name = "reimburse", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Reimburse reimburse;
+    @JoinColumn(name = "status", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Status status;
 
     @JoinColumn(name = "status", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

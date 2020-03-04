@@ -52,26 +52,27 @@ public class Ticket implements Serializable {
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "upload_date")
-    private LocalDate uploadDate;
-
+    @Temporal(TemporalType.DATE)
+    private Date uploadDate;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "photo_ticket")
     private String photoTicket;
-
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
     private int price;
 
     @JoinColumn(name = "parking", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private ParkingLot parking;
-
     @JoinColumn(name = "reimburse", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Reimburse reimburse;
+    @JoinColumn(name = "vehicle", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Vehicle vehicle;
 
     @JoinColumn(name = "vehicle", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

@@ -43,27 +43,25 @@ public class ParkingLot implements Serializable {
     @GenericGenerator(name = "increment", strategy = "increment")    @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "name")
     private String name;
-
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "location")
     private String location;
-
     @Size(max = 15)
     @Column(name = "phone_number")
     private String phoneNumber;
-
     @Basic(optional = false)
     @NotNull
     @Column(name = "default_price")
     private int defaultPrice;
+    @OneToMany(mappedBy = "parking", fetch = FetchType.LAZY)
+    private List<Ticket> ticketList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parking", fetch = FetchType.LAZY)
     private List<Ticket> ticketList;

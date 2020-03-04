@@ -164,18 +164,19 @@
                             <td>Ticket Photo</td>
                             <td><input type="file" id="photoTicket" name="photoTicket" class="form-control"/></td>
                         </tr>
-                        <tr>
-                            <td>Price</td>
-                            <td><input type="text" id="price" name="price" class="form-control"/></td>
-                        </tr>
+                        
                         <tr>
                             <td>Parking Lot</td>
                             <td>
                                 <select class="form-control" name="parking"  id="parking">
                                     <option value="0">select Parking Lot</option>
-                                    <option th:each="parkingLot : ${parkLots}" th:value="${parkingLot.id}" th:text="${parkingLot.name}"></option>
+                                    <option th:each="parkingLot : ${parkLots}" th:value="${parkingLot.id}+' '+${parkingLot.defaultPrice}" th:text="${parkingLot.name}+'- Rp '+${parkingLot.defaultPrice}"></option>
                                 </select>
                             </td>
+                        </tr>
+                        <tr>
+                            <td>Price</td>
+                            <td><input type="text" id="price" name="price" class="form-control" /></td>
                         </tr>
                         <tr>
                             <td>Vehicle</td>

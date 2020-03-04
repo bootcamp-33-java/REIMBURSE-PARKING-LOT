@@ -17,7 +17,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * @author Yuyun
+ *
+ * @author FIKRI-PC
  */
 @Entity
 @Table(name = "tb_tr_reimburse")
@@ -44,13 +45,12 @@ public class Reimburse implements Serializable {
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "end_date")
-    private LocalDate endDate;
-
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "total")
     private int total;
-
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
@@ -70,7 +70,6 @@ public class Reimburse implements Serializable {
     @JoinColumn(name = "current_status", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Status currentStatus;
-
     @JoinColumn(name = "employee", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Employee employee;

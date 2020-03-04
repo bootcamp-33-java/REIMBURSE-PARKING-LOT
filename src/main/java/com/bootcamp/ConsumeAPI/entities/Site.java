@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Yuyun
+ * @author FIKRI-PC
  */
 @Entity
 @Table(name = "tb_tr_site")
@@ -41,18 +41,17 @@ public class Site implements Serializable {
     @Size(min = 1, max = 5)
     @Column(name = "id")
     private String id;
-
     @Size(max = 100)
     @Column(name = "name")
     private String name;
-
     @Size(max = 150)
     @Column(name = "address")
     private String address;
-
     @JoinColumn(name = "pic", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Employee pic;
+    @OneToMany(mappedBy = "site", fetch = FetchType.LAZY)
+    private List<Employee> employeeList;
 
     @OneToMany(mappedBy = "site", fetch = FetchType.LAZY)
     private List<Employee> employeeList;

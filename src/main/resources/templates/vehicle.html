@@ -39,7 +39,7 @@
                             <table class="table table-hover table-bordered" id="sampleTable">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
+                                        <th></th>
                                         <th>Number Plate</th>
                                         <th>Vehicle Type</th>
                                         <th>Stnk Owner</th>
@@ -60,7 +60,7 @@
                                                 <i class="far fa fa-edit"></i>
                                             </button>
                                             <a th:id="@{vehicle/delete/}+${as.id}">
-                                               <button onclick="removeBtn(this.id)" type="button" class="btn  btn-danger btn-sm text-white">
+                                                <button onclick="removeBtn(this.id)" type="button" class="btn  btn-danger btn-sm text-white">
                                                     <i class="far fa fa-trash"></i>
                                                 </button></a>
                                             <!--====================================MODAL UPATE==================================-->
@@ -174,8 +174,24 @@
     <!--===================================END MODAL INSERT=====================================-->
 
     <div th:replace="fragments/header::script"></div>
+    <script>
+        $(document).ready(function () {
+            var t = $('#sampleTable').DataTable({
+                "columnDefs": [{
+                        "searchable": false,
+                        "orderable": false,
+                        "targets": 0
+                    }],
+                "order": [[1, 'asc']]
+            });
 
-
+            t.on('order.dt search.dt', function () {
+                t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+            }).draw();
+        });
+    </script>
 </body>
 
 
