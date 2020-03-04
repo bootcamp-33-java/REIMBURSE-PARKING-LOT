@@ -12,6 +12,13 @@
     <class>com.bootcamp.ConsumeAPI.entities.TbMEmployee</class>
     <class>com.bootcamp.ConsumeAPI.entities.TbTrHistory</class>
     <class>com.bootcamp.ConsumeAPI.entities.TbMStatus</class>
+    <class>com.bootcamp.ConsumeAPI.entities.ParkingLot</class>
+    <class>com.bootcamp.ConsumeAPI.entities.Reimburse</class>
+    <class>com.bootcamp.ConsumeAPI.entities.Site</class>
+    <class>com.bootcamp.ConsumeAPI.entities.Vehicle</class>
+    <class>com.bootcamp.ConsumeAPI.entities.History</class>
+    <class>com.bootcamp.ConsumeAPI.entities.Ticket</class>
+    <class>com.bootcamp.ConsumeAPI.entities.Status</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_dummy?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

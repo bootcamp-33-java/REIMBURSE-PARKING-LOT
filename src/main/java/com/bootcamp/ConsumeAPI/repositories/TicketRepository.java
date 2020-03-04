@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface TicketRepository extends PagingAndSortingRepository<Ticket, Integer> {
-    List<Ticket> findAllByReimburse_Id(String reimburseId);
+    List<Ticket> findAllByReimburse_IdContaining(String employeeId);
 
     Optional<Ticket> findById(Integer id);
 }

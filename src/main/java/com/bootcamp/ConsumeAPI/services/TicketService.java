@@ -7,16 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class TicketService {
 
     @Autowired
@@ -41,52 +39,50 @@ public class TicketService {
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("MMyyyy");
         String id = reimburseDto.getTicket().getUploadDate().format(formatter1);
 
-        String idReimburse = reimburseDto.getEmployeeId() + id;
 
+        Employee employee = reimburseDto.getEmployee();
+
+        String idReimburse = employee.getId() + id;
         Optional<Reimburse> optionalReimburse = reimburseService.findById(idReimburse);
 
+        LocalDate date = reimburseDto.getTicket().getUploadDate();
+        Reimburse reimburse = new Reimburse();
+        Status status = new Status();
+        status.setId(1);
+
         if (!optionalReimburse.isPresent()) {
-            Reimburse reimburse = new Reimburse();
             reimburse.setId(idReimburse);
-            reimburse.setStartDate(reimburseDto.getTicket().getUploadDate());
-            reimburse.setEndDate(reimburseDto.getTicket().getUploadDate());
-            Employee employee = new Employee();
-            employee.setId(reimburseDto.getEmployeeId());
+            reimburse.setStartDate(date);
+            reimburse.setEndDate(date);
             reimburse.setEmployee(employee);
             reimburse.setTotal(reimburseDto.getTicket().getPrice());
             reimburse.setPeriod(period);
-            Status status = new Status();
-            status.setId(5);
             reimburse.setCurrentStatus(status);
 
 
-            reimburseService.save(reimburse);
         } else {
-            Reimburse reimburse = optionalReimburse.get();
-            reimburse.setEndDate(reimburseDto.getTicket().getUploadDate());
+            reimburse = optionalReimburse.get();
+            reimburse.setEndDate(date);
             reimburse.setTotal(reimburse.getTotal() + reimburseDto.getTicket().getPrice());
 
-            reimburseService.save(reimburse);
         }
+        reimburse.setNotes("nothing");
+        reimburseService.save(reimburse);
+
+        reimburseDto.getTicket().setId(0);
+        reimburseDto.getTicket().setReimburse(reimburse);
 
         Ticket ticket = reimburseDto.getTicket();
-
-        Reimburse reimburse = new Reimburse();
-        reimburse.setId(idReimburse);
-        ticket.setReimburse(reimburse);
-
+        ticket.setPhotoTicket("photo");
         ticketRepository.save(ticket);
 
 
         History history = new History();
-        Employee employee = new Employee();
-        employee.setId(reimburseDto.getEmployeeId());
+        history.setId(0);
+        history.setReimburse(reimburse);
         history.setApprovalBy(employee);
-        history.setHistoryDate(new Date());
-        history.setNotes("");
-
-        Status status = new Status();
-        status.setId(5);
+        history.setHistoryDate(LocalDate.now());
+        history.setNotes(reimburse.getNotes());
         history.setStatus(status);
 
         historyService.save(history);
@@ -126,12 +122,7 @@ public class TicketService {
     }
 
     public List<Ticket> getAll(String employeeId) {
-        Optional<Reimburse> optionalReimburse = reimburseService.getEmployeeId(employeeId);
-        List<Ticket> ticketList = new ArrayList<>();
-        if (optionalReimburse.isPresent()) {
-            ticketList = ticketRepository.findAllByReimburse_Id(optionalReimburse.get().getId());
-        }
-        return ticketList;
+        return ticketRepository.findAllByReimburse_IdContaining(employeeId);
     }
 
     public List<ParkingLot> getAllParkingLot() {

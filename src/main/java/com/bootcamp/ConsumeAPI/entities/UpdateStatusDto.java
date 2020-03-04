@@ -10,4 +10,6 @@ public class UpdateStatusDto {
     private String role;
 
     private String status;
+
+    private String notes;
 }

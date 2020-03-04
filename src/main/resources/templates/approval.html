@@ -56,7 +56,7 @@
                                             <button data-toggle="modal" data-target="#updateModalapproved" type="button" class="btn btn-success btn-sm">Approved</button></a>
                                             <button data-toggle="modal" data-target="#updateModalreject"type="button" class="btn btn-danger btn-sm">Rejected</button></a>
                                             
-                                            <form action="@{}" method="POST">
+                                            <form action="@{approval/update/{id}(id=${as.id})/{action}(action='approved')}" method="POST">
                                                 <div class="modal fade" id="updateModalapproved" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
@@ -73,10 +73,10 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <td>Notes</td>
-                                                                            <td><textarea rows="4" cols="40" name="note" value="<% out.print(r.getNotes() == null ? "" : r.getNotes()); %>" ></textarea></td>
+                                                                            <td><textarea rows="4" cols="40" name="note" ></textarea></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td colspan="2"><input type="hidden" readonly=""  name="id" value="<% out.print(r.getId()); %>"  /></td>
+                                                                            <td colspan="2"><input type="hidden" readonly=""  name="id" th:value="${as.id}"  /></td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -92,7 +92,7 @@
                                             </form>
 
                                             <!--modal reject-->
-                                            <form action="pic?action=reject" method="POST">
+                                            <form action="@{approval/update/{id}(id=${as.id})/{action}(action='reject')}" method="POST">
                                                 <div class="modal fade" id="updateModalreject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
@@ -109,10 +109,10 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <td>Notes</td>
-                                                                            <td><textarea rows="4" cols="40" name="note" value="<% out.print(r.getNotes() == null ? "" : r.getNotes()); %>" ></textarea></td>
+                                                                            <td><textarea rows="4" cols="40" name="note" ></textarea></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td colspan="2"><input type="hidden" readonly=""  name="id" value="<% out.print(r.getId()); %>"  /></td>
+                                                                            <td colspan="2"><input type="hidden" readonly=""  name="id" th:value="${as.id}"  /></td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>

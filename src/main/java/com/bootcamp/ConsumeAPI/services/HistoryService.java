@@ -2,14 +2,11 @@ package com.bootcamp.ConsumeAPI.services;
 
 
 import com.bootcamp.ConsumeAPI.entities.History;
-import com.bootcamp.ConsumeAPI.entities.Reimburse;
 import com.bootcamp.ConsumeAPI.repositories.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class HistoryService {
@@ -27,13 +24,7 @@ public class HistoryService {
     }
 
     public List<History> getAll(String employeeId) {
-        Optional<Reimburse> optionalReimburse = reimburseService.getEmployeeId(employeeId);
-        List<History> historyList =new ArrayList<>();
-        if (optionalReimburse.isPresent()) {
+        return historyRepository.findAllByReimburse_IdContaining(employeeId);
 
-            historyList= historyRepository.findAllByReimburse_Id(optionalReimburse.get().getId());
-        }
-
-        return historyList;
-    }
+}
 }

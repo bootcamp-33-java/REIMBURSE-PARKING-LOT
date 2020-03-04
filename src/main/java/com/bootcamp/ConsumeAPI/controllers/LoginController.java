@@ -72,7 +72,10 @@ public class LoginController {
                 Employee employee = new Employee();
                 employee.setId(employeeLogin.getEmployee().getId());
                 employee.setEmail(employeeLogin.getEmployee().getEmail());
-                employee.setActive(true);
+                employee.setIsActive(true);
+                Site site=new Site();
+                site.setId("1");
+                employee.setSite(site);
                 employee.setRole(employeeLogin.getEmployee().getRoles().get(0));
                 employee.setName(employeeLogin.getEmployee().getFirstName() +" " +employeeLogin.getEmployee().getLastName() );
                     employeeService.save(employee); //send ke database local
