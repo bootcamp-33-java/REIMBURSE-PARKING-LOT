@@ -21,7 +21,6 @@ public class MainController {
     public String home(Model model,HttpServletRequest request){
         model.addAttribute("nama",request.getSession().getAttribute("employee"));
         model.addAttribute("peran",request.getSession().getAttribute("role"));
-    
         return "dashboard";
     }
 }

@@ -29,6 +29,7 @@ public class TicketController {
         model.addAttribute("parkLots", ticketService.getAllParkingLot());
         model.addAttribute("vehicles", ticketService.getAllVehicle(request.getSession().getAttribute("id").toString()));
         model.addAttribute("tickets", ticketService.getAll(request.getSession().getAttribute("id").toString()));
+        System.out.println();
         return "ticket";
     }
 
@@ -41,7 +42,7 @@ public class TicketController {
         return ("redirect:/ticket");
     }
 
-    @PutMapping("update")
+    @PostMapping("update")
     public String update(Ticket ticketEntity) {
         ticketService.update(ticketEntity);
 

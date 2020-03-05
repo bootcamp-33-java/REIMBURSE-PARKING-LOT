@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,20 +31,23 @@ public class TicketService {
     @Autowired
     private VehicleService vehicleService;
 
+    @Autowired
+    private EmployeeService employeeService;
+
 
     public ReimburseDto save(ReimburseDto reimburseDto) {
+        LocalDate date=reimburseDto.getTicket().getUploadDate().plusDays(1);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-        String period = reimburseDto.getTicket().getUploadDate().format(formatter);
+        String period = date.format(formatter);
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("MMyyyy");
-        String id = reimburseDto.getTicket().getUploadDate().format(formatter1);
+        String id = date.format(formatter1);
 
 
-        Employee employee = reimburseDto.getEmployee();
+        Employee employee = employeeService.getById(reimburseDto.getEmployee().getId()).get();
 
         String idReimburse = employee.getId() + id;
         Optional<Reimburse> optionalReimburse = reimburseService.findById(idReimburse);
 
-        LocalDate date = reimburseDto.getTicket().getUploadDate();
         Reimburse reimburse = new Reimburse();
         Status status = new Status();
         status.setId(1);
@@ -73,15 +75,14 @@ public class TicketService {
         reimburseDto.getTicket().setReimburse(reimburse);
 
         Ticket ticket = reimburseDto.getTicket();
+        ticket.setUploadDate(date);
         ticket.setPhotoTicket("photo");
         ticketRepository.save(ticket);
-
 
         History history = new History();
         history.setId(0);
         history.setReimburse(reimburse);
-        history.setApprovalBy(employee);
-        history.setHistoryDate(LocalDate.now());
+        history.setApprovalBy(employee.getSite().getPic());
         history.setNotes(reimburse.getNotes());
         history.setStatus(status);
 
@@ -122,7 +123,7 @@ public class TicketService {
     }
 
     public List<Ticket> getAll(String employeeId) {
-        return ticketRepository.findAllByReimburse_IdContaining(employeeId);
+        return ticketRepository.findAllByReimburse_IdStartingWith(employeeId);
     }
 
     public List<ParkingLot> getAllParkingLot() {

@@ -7,7 +7,7 @@ public class UpdateStatusDto {
 
     private String id;
 
-    private String role;
+    private String employeeId;
 
     private String status;
 

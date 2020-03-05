@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
     <div th:replace="fragments/header::head"></div>
     <style>
         .container {
@@ -17,24 +17,24 @@
     </style>
 </head>
 <body class="app sidebar-mini">
-    <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="index.html">Reimbursement</a>
-        <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
-        <!-- Navbar Right Menu-->
-        <ul class="app-nav">
-            <li class="app-search">
-                <input class="app-search__input" type="search" placeholder="Search">
-                <button class="app-search__button"><i class="fa fa-search"></i></button>
-            </li>
-            <li class="dropdown"><a class="app-nav__item" th:href="logout"><i class="fa fa-sign-out fa-lg"></i></a>
+<!-- Navbar-->
+<header class="app-header"><a class="app-header__logo" href="index.html">Reimbursement</a>
+    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+        <li class="app-search">
+            <input class="app-search__input" type="search" placeholder="Search">
+            <button class="app-search__button"><i class="fa fa-search"></i></button>
+        </li>
+        <li class="dropdown"><a class="app-nav__item" th:href="logout"><i class="fa fa-sign-out fa-lg"></i></a>
 
-            </li>
-        </ul>
-    </header>
-    <!-- Sidebar menu-->
-    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+        </li>
+    </ul>
+</header>
+<!-- Sidebar menu-->
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 
-    <div th:replace="fragments/header::sidebar"></div>
+<div th:replace="fragments/header::sidebar"></div>
 
     <main class="app-content">
         <div class="app-title">
@@ -62,27 +62,28 @@
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
 
-    <div th:replace="fragments/header::script"></div>
-    <script>
-        var slideIndex = 0;
-        showSlides();
+<div th:replace="fragments/header::script"></div>
+<script>
+    var slideIndex = 0;
+    showSlides();
 
-        function showSlides() {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1
-            }
-            slides[slideIndex - 1].style.display = "block";
-            setTimeout(showSlides, 2000); // Change image every 2 seconds
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
         }
-    </script>
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1
+        }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+    }
+</script>
 </body>
 </html>
