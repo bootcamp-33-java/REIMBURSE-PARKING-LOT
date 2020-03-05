@@ -64,69 +64,69 @@
                                         <i class="far fa fa-edit"></i>
                                     </button>
                                     <a th:id="@{vehicle/delete/}+${as.id}">
-                                    <button onclick="removeBtn(this.id)" type="button" class="btn  btn-danger btn-sm">
-                                        <i class="far fa fa-trash"></i>
-                                    </button>
+                                        <button onclick="removeBtn(this.id)" type="button" class="btn  btn-danger btn-sm">
+                                            <i class="far fa fa-trash"></i>
+                                        </button>
                                     </a>
-<!--                                    &lt;!&ndash;====================================MODAL UPATE==================================&ndash;&gt;-->
-<!--                                    <form th:action="@{save}" th:object="${vehicle}" method="post">-->
-<!--                                        <div class="modal fade" th:id="updateModal+${as.id}" tabindex="-1" role="dialog"-->
-<!--                                             aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--                                            <div class="modal-dialog" role="document">-->
-<!--                                                <div class="modal-content">-->
-<!--                                                    <div class="modal-header">-->
-<!--                                                        <h5 class="modal-title" id="exampleModalLabel">Update</h5>-->
-<!--                                                        <button type="button" class="close" data-dismiss="modal"-->
-<!--                                                                aria-label="Close">-->
-<!--                                                            <span aria-hidden="true">&times;</span>-->
-<!--                                                        </button>-->
-<!--                                                    </div>-->
+                                    <!--                                    &lt;!&ndash;====================================MODAL UPATE==================================&ndash;&gt;-->
+                                    <!--                                    <form th:action="@{save}" th:object="${vehicle}" method="post">-->
+                                    <!--                                        <div class="modal fade" th:id="updateModal+${as.id}" tabindex="-1" role="dialog"-->
+                                    <!--                                             aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+                                    <!--                                            <div class="modal-dialog" role="document">-->
+                                    <!--                                                <div class="modal-content">-->
+                                    <!--                                                    <div class="modal-header">-->
+                                    <!--                                                        <h5 class="modal-title" id="exampleModalLabel">Update</h5>-->
+                                    <!--                                                        <button type="button" class="close" data-dismiss="modal"-->
+                                    <!--                                                                aria-label="Close">-->
+                                    <!--                                                            <span aria-hidden="true">&times;</span>-->
+                                    <!--                                                        </button>-->
+                                    <!--                                                    </div>-->
 
-<!--                                                    &lt;!&ndash;==================================Isi method UPDATE Modal====================================================================&ndash;&gt;-->
-<!--                                                    <div class="modal-body">-->
+                                    <!--                                                    &lt;!&ndash;==================================Isi method UPDATE Modal====================================================================&ndash;&gt;-->
+                                    <!--                                                    <div class="modal-body">-->
 
-<!--                                                        <table border="0">-->
-<!--                                                            <tbody>-->
-<!--                                                            <tr>-->
-<!--                                                                <th>Number Plate</th>-->
-<!--                                                                <th><input type="text" id="id" name="id"-->
-<!--                                                                           th:value="${as.id}"/></th>-->
-<!--                                                            </tr>-->
-<!--                                                            <tr>-->
-<!--                                                                <td>Vehicle Type</td>-->
-<!--                                                                <td><input type="text" id="vehicleType"-->
-<!--                                                                           name="vehicleType"-->
-<!--                                                                           th:value="${as.vehicle}"/></td>-->
-<!--                                                            </tr>-->
-<!--                                                            <tr>-->
-<!--                                                                <td>STNK Owner</td>-->
-<!--                                                                <td><input type="text" id="stnkOwner" name="stnkOwner"-->
-<!--                                                                           th:value="${as.stnkOwner}"/></td>-->
-<!--                                                            </tr>-->
-<!--                                                            <tr>-->
-<!--                                                                <td>Photo STNK</td>-->
-<!--                                                                <td><input type="text" id="photoStnk" name="photoStnk"-->
-<!--                                                                           th:value="${as.photoStnk}"/></td>-->
-<!--                                                            </tr>-->
+                                    <!--                                                        <table border="0">-->
+                                    <!--                                                            <tbody>-->
+                                    <!--                                                            <tr>-->
+                                    <!--                                                                <th>Number Plate</th>-->
+                                    <!--                                                                <th><input type="text" id="id" name="id"-->
+                                    <!--                                                                           th:value="${as.id}"/></th>-->
+                                    <!--                                                            </tr>-->
+                                    <!--                                                            <tr>-->
+                                    <!--                                                                <td>Vehicle Type</td>-->
+                                    <!--                                                                <td><input type="text" id="vehicleType"-->
+                                    <!--                                                                           name="vehicleType"-->
+                                    <!--                                                                           th:value="${as.vehicle}"/></td>-->
+                                    <!--                                                            </tr>-->
+                                    <!--                                                            <tr>-->
+                                    <!--                                                                <td>STNK Owner</td>-->
+                                    <!--                                                                <td><input type="text" id="stnkOwner" name="stnkOwner"-->
+                                    <!--                                                                           th:value="${as.stnkOwner}"/></td>-->
+                                    <!--                                                            </tr>-->
+                                    <!--                                                            <tr>-->
+                                    <!--                                                                <td>Photo STNK</td>-->
+                                    <!--                                                                <td><input type="text" id="photoStnk" name="photoStnk"-->
+                                    <!--                                                                           th:value="${as.photoStnk}"/></td>-->
+                                    <!--                                                            </tr>-->
 
 
-<!--                                                            </tbody>-->
-<!--                                                        </table>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="modal-footer">-->
-<!--                                                        &lt;!&ndash;==================================Button pada modal UPDATE====================================================================&ndash;&gt;-->
-<!--                                                        <button type="button" class="btn btn-danger"-->
-<!--                                                                data-dismiss="modal">Close-->
-<!--                                                        </button>-->
-<!--                                                        <button onclick="okeBtn()" type="submit"-->
-<!--                                                                class="btn btn-primary">Update-->
-<!--                                                        </button>-->
+                                    <!--                                                            </tbody>-->
+                                    <!--                                                        </table>-->
+                                    <!--                                                    </div>-->
+                                    <!--                                                    <div class="modal-footer">-->
+                                    <!--                                                        &lt;!&ndash;==================================Button pada modal UPDATE====================================================================&ndash;&gt;-->
+                                    <!--                                                        <button type="button" class="btn btn-danger"-->
+                                    <!--                                                                data-dismiss="modal">Close-->
+                                    <!--                                                        </button>-->
+                                    <!--                                                        <button onclick="okeBtn()" type="submit"-->
+                                    <!--                                                                class="btn btn-primary">Update-->
+                                    <!--                                                        </button>-->
 
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </form>-->
+                                    <!--                                                    </div>-->
+                                    <!--                                                </div>-->
+                                    <!--                                            </div>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </form>-->
                                     <!--====================================END MODAL UPATE==================================-->
                                 </td>
                             </tr>

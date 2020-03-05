@@ -4,67 +4,67 @@
     <div th:replace="fragments/header::head"></div>
 </head>
 <body class="app sidebar-mini">
-    <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="index.html">Reimbursement</a>
-        <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
-        <!-- Navbar Right Menu-->
-        <ul class="app-nav">
-            <li class="app-search">
-                <input class="app-search__input" type="search" placeholder="Search">
-                <button class="app-search__button"><i class="fa fa-search"></i></button>
-            </li>
-            <li class="dropdown"><a class="app-nav__item" th:href="logout"><i class="fa fa-sign-out fa-lg"></i></a>
+<!-- Navbar-->
+<header class="app-header"><a class="app-header__logo" href="index.html">Reimbursement</a>
+    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+        <li class="app-search">
+            <input class="app-search__input" type="search" placeholder="Search">
+            <button class="app-search__button"><i class="fa fa-search"></i></button>
+        </li>
+        <li class="dropdown"><a class="app-nav__item" th:href="logout"><i class="fa fa-sign-out fa-lg"></i></a>
 
-            </li>
-        </ul>
-    </header>
-    <!-- Sidebar menu-->
-    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-    <div th:replace="fragments/header::sidebar"></div>
-    <main class="app-content">
-        <div class="app-title">
-            <div>
-                <h1><i class="fa fa-th-list"></i>History Apply Reimbursement</h1>
-                <p>Table to display History Apply Reimburse</p>
-            </div>
+        </li>
+    </ul>
+</header>
+<!-- Sidebar menu-->
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<div th:replace="fragments/header::sidebar"></div>
+<main class="app-content">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-th-list"></i>History Apply Reimbursement</h1>
+            <p>Table to display History Apply Reimburse</p>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="tile">
-                    <div class="tile-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-bordered" id="sampleTable">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Period</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Notes</th>
-                                        <th>Approval By</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="as : ${histories}">
-                                        <td></td>
-                                        <td th:text="${as.reimburse.period}"></td>
-                                        <td th:text="${as.historyDate}"></td>
-                                        <td th:text="${as.status.name}"></td>
-                                        <td th:text="${as.notes}"></td>
-                                        <td th:text="${as.approvalBy.id}+' - '+${as.approvalBy.name}"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered" id="sampleTable">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Period</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Notes</th>
+                                <th>Approval By</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="as : ${histories}">
+                                <td></td>
+                                <td th:text="${as.reimburse.period}"></td>
+                                <td th:text="${as.historyDate}"></td>
+                                <td th:text="${as.status.name}"></td>
+                                <td th:text="${as.notes}"></td>
+                                <td th:text="${as.approvalBy.id}+' - '+${as.approvalBy.name}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
 
-  <div th:replace="fragments/header::script"></div>
+<div th:replace="fragments/header::script"></div>
 </body>
 
 

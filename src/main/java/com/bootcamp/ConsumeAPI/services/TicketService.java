@@ -31,6 +31,9 @@ public class TicketService {
     @Autowired
     private VehicleService vehicleService;
 
+    @Autowired
+    private EmployeeService employeeService;
+
 
     public ReimburseDto save(ReimburseDto reimburseDto) {
         LocalDate date=reimburseDto.getTicket().getUploadDate().plusDays(1);
@@ -40,7 +43,7 @@ public class TicketService {
         String id = date.format(formatter1);
 
 
-        Employee employee = reimburseDto.getEmployee();
+        Employee employee = employeeService.getById(reimburseDto.getEmployee().getId()).get();
 
         String idReimburse = employee.getId() + id;
         Optional<Reimburse> optionalReimburse = reimburseService.findById(idReimburse);
