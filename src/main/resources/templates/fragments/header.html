@@ -71,7 +71,11 @@
     <!-- Data table plugin-->
     <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    <script type="text/javascript">$('#sampleTable').DataTable({
+        "fnCreatedRow": function (row, data, index) {
+            $('td', row).eq(0).html(index + 1);
+        }
+    });</script>
 
     <script type="text/javascript" src="js/plugins/chart.js"></script>
     <script type="text/javascript">

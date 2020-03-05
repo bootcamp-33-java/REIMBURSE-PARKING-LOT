@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @RequestMapping(value = "approval")
 @Controller
@@ -25,7 +27,7 @@ public class ReimburseController {
     }
 
     @PostMapping("update/{action}")
-    public String updateStatus(HttpServletRequest request, @Valid UpdateStatusDto updateStatusDto,  @PathVariable String action){
+    public String updateStatus(HttpServletRequest request, @Valid UpdateStatusDto updateStatusDto,  @PathVariable String action) throws IOException, MessagingException {
         updateStatusDto.setStatus(action);
         updateStatusDto.setEmployeeId(request.getSession().getAttribute("id").toString());
         reimburseService.updateStatus(updateStatusDto);
