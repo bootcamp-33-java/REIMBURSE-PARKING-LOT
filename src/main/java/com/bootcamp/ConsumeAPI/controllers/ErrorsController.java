@@ -5,6 +5,8 @@
  */
 package com.bootcamp.ConsumeAPI.controllers;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
@@ -24,11 +26,11 @@ public class ErrorsController implements ErrorController {
         ModelAndView modelAndView = new ModelAndView();
 
         if (response.getStatus() == HttpStatus.NOT_FOUND.value()) {
-            modelAndView.setViewName("error-404");
+            modelAndView.setViewName("error");
         } else if (response.getStatus() == HttpStatus.FORBIDDEN.value()) {
-            modelAndView.setViewName("error-403");
+            modelAndView.setViewName("error");
         } else if (response.getStatus() == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-            modelAndView.setViewName("error-500");
+            modelAndView.setViewName("error");
         } else {
             modelAndView.setViewName("error");
         }
