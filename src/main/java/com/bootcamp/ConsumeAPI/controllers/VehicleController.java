@@ -8,19 +8,16 @@ package com.bootcamp.ConsumeAPI.controllers;
 import com.bootcamp.ConsumeAPI.entities.Employee;
 import com.bootcamp.ConsumeAPI.entities.Vehicle;
 import com.bootcamp.ConsumeAPI.services.VehicleService;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 /**
- *
  * @author FIKRI-PC
  */
 @RequestMapping(value = "/vehicle")
@@ -32,18 +29,24 @@ public class VehicleController {
 
 
     @GetMapping("")
-    public String getAll(Model model, HttpServletRequest request){
+    public String getAll(Model model, HttpServletRequest request) {
         model.addAttribute("nama", request.getSession().getAttribute("employee"));
-        model.addAttribute("peran",request.getSession().getAttribute("role"));
-        model.addAttribute("vehicles",service.getAll(request.getSession().getAttribute("id").toString())) ;
-          return "vehicle";
+        model.addAttribute("peran", request.getSession().getAttribute("role"));
+        model.addAttribute("vehicles", service.getAll(request.getSession().getAttribute("id").toString()));
+        return "vehicle";
     }
 
     @PostMapping("save")
-    public String save(@Valid Vehicle vehicle,HttpServletRequest request) {
-        vehicle.setPhotoStnk("poto");
+    public String save(@RequestParam("photoStnk") MultipartFile file, @Valid Vehicle vehicle, HttpServletRequest request) {
         vehicle.setEmployee(new Employee(request.getSession().getAttribute("id").toString()));
         service.save(vehicle);
+        return ("redirect:/vehicle");
+    }
+
+    @PostMapping("update")
+    public String update( @Valid Vehicle vehicle, HttpServletRequest request) {
+        vehicle.setEmployee(new Employee(request.getSession().getAttribute("id").toString()));
+        service.update(vehicle);
         return ("redirect:/vehicle");
     }
 

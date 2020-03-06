@@ -114,7 +114,7 @@
 </head>
 <body class="app sidebar-mini">
 <!-- Navbar-->
-<header class="app-header"><a class="app-header__logo" href="index.html">Reimbursement</a>
+<header class="app-header"><a class="app-header__logo" th:href="@{/}">Reimbursement</a>
     <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
     <!-- Navbar Right Menu-->
     <ul class="app-nav">
@@ -147,14 +147,14 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="container">
-                        <a th:href="@{ticket}">
-                            <img src="img/slider4.jpg" style="width:100%" >
-                            <div class="centered">
-                                <button th:href="@{ticket}" class="btn btn-light btn-lg" style="font-size: 30 px">Reimburse</button>
-                            </div>
+                    <a th:href="@{ticket}">
+                        <img src="img/slider4.jpg" style="width:100%" >
+                        <div class="centered">
+                            <button th:href="@{ticket}" class="btn btn-light btn-lg text-white" style="font-size: 30px;background-color: #d07209">Reimburse</button>
+                        </div>
 
-                        </a>
-                    </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

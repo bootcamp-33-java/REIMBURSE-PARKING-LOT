@@ -28,8 +28,8 @@
 <div th:fragment="sidebar" xmlns:th="http://www.w3.org/1999/xhtml">
     <aside class="app-sidebar">
         <div class="app-sidebar__user"><img class="app-sidebar__user-avatar"
-                                            src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg"
-                                            alt="User Image">
+                                            th:src="@{..\img\wikwik.png}"
+                                            alt="User Image" style="width: 47px">
             <div>
                 <p class="app-sidebar__user-name" style="font-size: 12px" th:text="${nama}"></p>
                 <p class="app-sidebar__user-name" style="font-size: 12px" th:text="${peran}"></p>
