@@ -37,7 +37,7 @@ public class VehicleController {
     }
 
     @PostMapping("save")
-    public String save(@RequestParam("photoStnk") MultipartFile file, @Valid Vehicle vehicle, HttpServletRequest request) {
+    public String save(@Valid Vehicle vehicle, HttpServletRequest request) {
         vehicle.setEmployee(new Employee(request.getSession().getAttribute("id").toString()));
         service.save(vehicle);
         return ("redirect:/vehicle");
