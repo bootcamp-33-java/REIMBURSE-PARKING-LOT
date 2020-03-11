@@ -9,11 +9,11 @@
     <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
     <!-- Navbar Right Menu-->
     <ul class="app-nav">
-        <li class="app-search">
-            <input class="app-search__input" type="search" placeholder="Search">
-            <button class="app-search__button"><i class="fa fa-search"></i></button>
-        </li>
-        <li class="dropdown"><a class="app-nav__item" th:href="logout"><i class="fa fa-sign-out fa-lg"></i></a>
+<!--        <li class="app-search">-->
+<!--            <input class="app-search__input" type="search" placeholder="Search">-->
+<!--            <button class="app-search__button"><i class="fa fa-search"></i></button>-->
+<!--        </li>-->
+        <li class="dropdown"><a class="app-nav__item" th:href="logout">Log Out   <i class="fa fa-sign-out fa-lg"></i></a>
 
         </li>
     </ul>
@@ -36,7 +36,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
-                            <tr>
+                            <tr align="center">
                                 <th>No</th>
                                 <th>Period</th>
                                 <th>Date</th>
@@ -49,7 +49,7 @@
                             <tr th:each="as : ${histories}">
                                 <td>#</td>
                                 <td th:text="${as.reimburse.period}"></td>
-                                <td th:text="${as.historyDate}"></td>
+                                <td th:text="${#temporals.format(as.historyDate, 'dd MMMM yyyy HH:mm:ss')}"></td>
                                 <td th:text="${as.status.name}"></td>
                                 <td th:text="${as.notes}"></td>
                                 <td th:text="${as.approvalBy.id}+' - '+${as.approvalBy.name}"></td>

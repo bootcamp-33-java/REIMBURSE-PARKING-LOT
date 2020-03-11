@@ -34,6 +34,9 @@ public class TicketService {
     @Autowired
     private EmployeeService employeeService;
 
+    public Ticket getById(Integer id){
+        return ticketRepository.findById(id).get();
+    }
 
     public ReimburseDto save(ReimburseDto reimburseDto) {
         LocalDate date=reimburseDto.getTicket().getUploadDate().plusDays(1);
@@ -76,7 +79,6 @@ public class TicketService {
 
         Ticket ticket = reimburseDto.getTicket();
         ticket.setUploadDate(date);
-        ticket.setPhotoTicket("photo");
         ticketRepository.save(ticket);
 
         History history = new History();

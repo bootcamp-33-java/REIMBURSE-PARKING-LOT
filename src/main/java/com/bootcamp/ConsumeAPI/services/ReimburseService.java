@@ -95,16 +95,11 @@ public class ReimburseService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
         String date = LocalDate.now().format(formatter);
 
-//        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.);
+        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
 
-        DecimalFormat cursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
-
-        formatRp.setMonetaryDecimalSeparator(',');
-        formatRp.setGroupingSeparator('.');
-
-        cursIndonesia.setDecimalFormatSymbols(formatRp);
-                String total = cursIndonesia.format(reimburse.getTotal());
+                String totalPrice = format.format(reimburse.getTotal());
+                String target="$";
+                String total=totalPrice.replace(target,"Rp. ");
 
         if (optionalReimburse.isPresent()) {
             reimburse = optionalReimburse.get();

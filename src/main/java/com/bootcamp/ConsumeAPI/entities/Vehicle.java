@@ -55,8 +55,7 @@ public class Vehicle implements Serializable {
     @Column(name = "stnk_owner")
     private String stnkOwner;
 
-    @Basic(optional = false)
-    @NotNull
+
     @Size(min = 1, max = 255)
     @Column(name = "photo_stnk")
     private String photoStnk;

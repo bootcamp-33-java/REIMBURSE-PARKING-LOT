@@ -55,7 +55,6 @@ public class Ticket implements Serializable {
     private LocalDate uploadDate;
 
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "photo_ticket")
     private String photoTicket;

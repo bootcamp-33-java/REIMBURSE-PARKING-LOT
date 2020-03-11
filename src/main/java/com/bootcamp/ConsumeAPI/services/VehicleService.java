@@ -33,7 +33,6 @@ public class VehicleService {
         String idNew = id.replace(target, " ").toUpperCase();
 
         vehicle.setId(idNew);
-        vehicle.setPhotoStnk("poto");
         return vehicleRepository.save(vehicle);
     }
 
